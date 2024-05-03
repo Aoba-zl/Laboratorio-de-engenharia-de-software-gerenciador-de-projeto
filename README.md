@@ -7,7 +7,7 @@
 
 [Diagrama de Classe](#diagrama-de-classe-de-gerenciamento-de-projeto)
 
-[Diagrama de Sequencia](#diagrama-de-sequencia)
+[Diagrama de Sequencia](#diagrama-de-sequência)
 
 ## Requisitos:
 Código	|Funcional (F), Não Funcional (NF) ou Regra de Negócio (RN)	|Descrição do Requisito	|Prioridade (Alta/Média/Baixa)
