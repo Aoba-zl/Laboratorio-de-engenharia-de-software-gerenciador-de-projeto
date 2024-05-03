@@ -2,8 +2,11 @@
 
 ## Links:
 [Requisitos](#requisitos)
+
 [Caso de uso](#caso-de-uso)
+
 [Diagrama de Classe](#diagrama-de-classe-de-gerenciamento-de-projeto)
+
 [Diagrama de Sequencia](#diagrama-de-sequencia)
 
 ## Requisitos:
