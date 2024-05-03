@@ -1,13 +1,14 @@
 # Laboratório de Engenharia de Software - Gerenciador de Projeto Simples
 
 ## Links:
-[Requisitos](#requisitos)
-
-[Caso de uso](#caso-de-uso)
-
-[Diagrama de Classe](#diagrama-de-classe-de-gerenciamento-de-projeto)
-
-[Diagrama de Sequencia](#diagrama-de-sequência)
+- [Requisitos](#requisitos)
+- [Caso de uso](#caso-de-uso)
+- [Diagrama de Classe](#diagrama-de-classe-de-gerenciamento-de-projeto)
+- [Diagrama de Sequencia](#diagrama-de-sequência)
+  - [Projetista](#projetista)
+  - [Projeto](#projeto)
+  - [Atividade](#atividade)
+  - [Login](#login)
 
 ## Requisitos:
 Código	|Funcional (F), Não Funcional (NF) ou Regra de Negócio (RN)	|Descrição do Requisito	|Prioridade (Alta/Média/Baixa)
