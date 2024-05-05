@@ -1,6 +1,5 @@
 package com.fatec.LBEGerenciadorDeProjetoSimples.model;
 
-import java.time.LocalDate;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
