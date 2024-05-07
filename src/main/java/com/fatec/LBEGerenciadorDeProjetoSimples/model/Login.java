@@ -23,7 +23,7 @@ import lombok.ToString;
 public class Login {
 	
 	@Id
-    @OneToOne
+    @OneToOne(mappedBy = "login",targetEntity = Projetista.class)
     @JoinColumn(name = "projetista_id")
     private Projetista projetista;
 	

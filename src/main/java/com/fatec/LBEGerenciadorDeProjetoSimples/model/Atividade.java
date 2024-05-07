@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
@@ -30,9 +31,11 @@ public class Atividade {
 	@Column(name = "descricao", length = 100,nullable = false)
 	private String descricao;
 	
+	@Id
 	@Column(name = "nome", length = 50,nullable = false)
 	private String nome;
 	
+	@Id
     @ManyToOne
     @JoinColumn(name = "projetoid",nullable = false)
     private Projeto projeto;
