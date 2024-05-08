@@ -3,6 +3,7 @@ package com.fatec.LBEGerenciadorDeProjetoSimples.controller;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,10 +12,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fatec.LBEGerenciadorDeProjetoSimples.model.Projeto;
+import com.fatec.LBEGerenciadorDeProjetoSimples.repository.IProjetoRepository;
 
 @Controller
 public class ProjetoController {
 	private LoginController lController;
+	
+	@Autowired
+	private IProjetoRepository projetoRep;
 	@RequestMapping(name = "projeto", value = "/projeto", method = RequestMethod.GET)
 	public ModelAndView projetoGet(ModelMap model) {
 		
