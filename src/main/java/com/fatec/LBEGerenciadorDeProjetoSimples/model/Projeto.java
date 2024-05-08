@@ -36,7 +36,7 @@ public class Projeto {
 	@Column(name = "descricao", length = 100,nullable = false)
 	private String descricao;
 	
-    @OneToMany(mappedBy = "projeto", targetEntity = Atividade.class, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "projeto",cascade = CascadeType.ALL)
     private List<Atividade> atividades;
     
     @OneToMany(mappedBy = "projeto", targetEntity = Equipe.class)

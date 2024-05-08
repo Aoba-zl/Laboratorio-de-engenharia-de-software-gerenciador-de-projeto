@@ -8,6 +8,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -36,6 +37,7 @@ public class Projetista {
     @OneToMany(mappedBy = "projetista", targetEntity = Equipe.class)
     private List<Equipe> equipe;
 	
-    @OneToOne(mappedBy = "projetista",targetEntity = Login.class, cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "projetista",cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
     private Login login;
 }
