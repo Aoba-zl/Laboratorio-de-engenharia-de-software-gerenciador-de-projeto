@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fatec.LBEGerenciadorDeProjetoSimples.model.Projetista;
+import com.fatec.LBEGerenciadorDeProjetoSimples.repository.IEquipeRepository;
 import com.fatec.LBEGerenciadorDeProjetoSimples.repository.IProjetoRepository;
 
 public class ProjetistaController {
@@ -17,6 +18,7 @@ public class ProjetistaController {
 	
 	@Autowired
 	private IProjetoRepository projetistaRep;
+	private IEquipeRepository equipeRep;
 	
 	@RequestMapping(name = "projetista", value = "/projetista", method = RequestMethod.GET)
 	public ModelAndView projetoGet(ModelMap model) {

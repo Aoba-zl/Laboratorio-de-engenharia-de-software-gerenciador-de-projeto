@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fatec.LBEGerenciadorDeProjetoSimples.model.Projeto;
+import com.fatec.LBEGerenciadorDeProjetoSimples.repository.IEquipeRepository;
 import com.fatec.LBEGerenciadorDeProjetoSimples.repository.IProjetoRepository;
 
 @Controller
@@ -20,6 +21,8 @@ public class ProjetoController {
 	
 	@Autowired
 	private IProjetoRepository projetoRep;
+	private IProjetoRepository projetistaRep;
+	private IEquipeRepository equipeRep;
 	@RequestMapping(name = "projeto", value = "/projeto", method = RequestMethod.GET)
 	public ModelAndView projetoGet(ModelMap model) {
 		
