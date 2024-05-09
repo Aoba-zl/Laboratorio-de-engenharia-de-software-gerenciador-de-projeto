@@ -4,7 +4,9 @@ import java.time.LocalDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
@@ -21,6 +23,7 @@ import lombok.ToString;
 @ToString
 @Entity
 @Table(name = "atividade")
+@IdClass(AtividadeId.class)
 public class Atividade {
 	@Column(name = "dataInicial", nullable = false)
 	private LocalDate dataInicial;
@@ -36,7 +39,7 @@ public class Atividade {
 	private String nome;
 	
 	@Id
-    @ManyToOne
+    @ManyToOne(targetEntity = Projeto.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "projetoid",nullable = false)
     private Projeto projeto;
 }

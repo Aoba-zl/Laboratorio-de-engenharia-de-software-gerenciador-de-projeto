@@ -3,6 +3,7 @@ package com.fatec.LBEGerenciadorDeProjetoSimples.controller;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -11,13 +12,14 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.fatec.LBEGerenciadorDeProjetoSimples.model.Projetista;
 import com.fatec.LBEGerenciadorDeProjetoSimples.repository.IEquipeRepository;
-import com.fatec.LBEGerenciadorDeProjetoSimples.repository.IProjetoRepository;
-
+import com.fatec.LBEGerenciadorDeProjetoSimples.repository.IProjetistaRepository;
+@Controller
 public class ProjetistaController {
 	private LoginController lController;
 	
 	@Autowired
-	private IProjetoRepository projetistaRep;
+	private IProjetistaRepository projetistaRep;
+	@Autowired
 	private IEquipeRepository equipeRep;
 	
 	@RequestMapping(name = "projetista", value = "/projetista", method = RequestMethod.GET)
@@ -46,5 +48,10 @@ public class ProjetistaController {
 	public Projetista consultar(Projetista projetista) {
 		return null;
 		
+	}
+
+	public void opProjetista() {
+		Projetista p = new Projetista("a","a");
+		projetistaRep.save(p);
 	}
 }

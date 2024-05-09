@@ -5,6 +5,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -23,13 +24,17 @@ import lombok.ToString;
 public class Login {
 	
 	@Id
-    @OneToOne(mappedBy = "login",targetEntity = Projetista.class)
-    @JoinColumn(name = "projetista_id")
-    private Projetista projetista;
+    @Column(name = "projetista_id")
+    private int id;
 	
 	@Column(name = "usuario",length = 80, nullable = false)
 	private String usuario;
 	
 	@Column(name = "senha",length = 30, nullable = false)
 	private String senha;
+	
+	@OneToOne
+	@MapsId
+	@JoinColumn(name = "projetista_id")
+    private Projetista projetista;
 }
