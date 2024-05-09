@@ -1,5 +1,6 @@
 package com.fatec.LBEGerenciadorDeProjetoSimples.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -13,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.fatec.LBEGerenciadorDeProjetoSimples.model.Projeto;
 import com.fatec.LBEGerenciadorDeProjetoSimples.repository.IEquipeRepository;
+import com.fatec.LBEGerenciadorDeProjetoSimples.repository.IProjetistaRepository;
 import com.fatec.LBEGerenciadorDeProjetoSimples.repository.IProjetoRepository;
 
 @Controller
@@ -21,8 +23,11 @@ public class ProjetoController {
 	
 	@Autowired
 	private IProjetoRepository projetoRep;
-	private IProjetoRepository projetistaRep;
+	@Autowired
+	private IProjetistaRepository projetistaRep;
+	@Autowired
 	private IEquipeRepository equipeRep;
+	
 	@RequestMapping(name = "projeto", value = "/projeto", method = RequestMethod.GET)
 	public ModelAndView projetoGet(ModelMap model) {
 		
@@ -53,5 +58,9 @@ public class ProjetoController {
 	public List<Projeto> listar(){
 		return null;
 		
+	}
+	public void opProjeto() {
+		Projeto p = new Projeto("lacração",LocalDate.now(), LocalDate.now(),"a");
+		projetoRep.save(p);
 	}
 }

@@ -31,6 +31,5 @@ public class LoginController {
 	}
 	public boolean verificarLogin (Login login) {
 		return false;
-		
 	}
 }

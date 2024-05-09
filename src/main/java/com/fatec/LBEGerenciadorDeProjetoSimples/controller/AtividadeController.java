@@ -15,6 +15,7 @@ import com.fatec.LBEGerenciadorDeProjetoSimples.model.Atividade;
 import com.fatec.LBEGerenciadorDeProjetoSimples.repository.IAtividadeRepository;
 import com.fatec.LBEGerenciadorDeProjetoSimples.repository.IProjetoRepository;
 @Controller
+
 public class AtividadeController {
 	private LoginController lController;
 	
@@ -51,6 +52,7 @@ public class AtividadeController {
 		
 	}
 	public List<Atividade> listar(){
+		projetoRep.save(null);
 		return null;
 		
 	}
