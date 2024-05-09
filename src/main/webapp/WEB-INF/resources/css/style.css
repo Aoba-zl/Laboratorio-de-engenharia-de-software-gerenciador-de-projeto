@@ -1,13 +1,25 @@
-.custom {
-	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
+
+.site-header {
+	background-color: rgba(0, 0, 0, .85);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    backdrop-filter: saturate(180%) blur(20px);
 }
 
-.start {
-	height: 50vh;
+.site-header a {
+    color: #999;
+    transition: ease-in-out color .15s;
+}
+
+a {
+	text-decoration: none;
+	background-color: transparent;
+	padding: 0.5rem;
+	background: transparent;
+    border: transparent;
+}
+
+.a-color:hover {
+	color: #fff;
 }
 
 .scroll {
@@ -34,11 +46,6 @@
 	border: 2px solid #555555;
 }
 
-.form-container-aluno
-{
-	max-width: 1000px;
-	padding: 1rem;
-}
 
 .form-container
 {
