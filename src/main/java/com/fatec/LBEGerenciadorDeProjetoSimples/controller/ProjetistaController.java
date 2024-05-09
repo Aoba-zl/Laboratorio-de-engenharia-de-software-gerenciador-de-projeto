@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fatec.LBEGerenciadorDeProjetoSimples.model.Login;
 import com.fatec.LBEGerenciadorDeProjetoSimples.model.Projetista;
 import com.fatec.LBEGerenciadorDeProjetoSimples.repository.IEquipeRepository;
+import com.fatec.LBEGerenciadorDeProjetoSimples.repository.ILoginRepository;
 import com.fatec.LBEGerenciadorDeProjetoSimples.repository.IProjetistaRepository;
 @Controller
 public class ProjetistaController {
@@ -21,6 +23,8 @@ public class ProjetistaController {
 	private IProjetistaRepository projetistaRep;
 	@Autowired
 	private IEquipeRepository equipeRep;
+	@Autowired
+	ILoginRepository loginRep;
 	
 	@RequestMapping(name = "projetista", value = "/projetista", method = RequestMethod.GET)
 	public ModelAndView projetoGet(ModelMap model) {
@@ -52,6 +56,12 @@ public class ProjetistaController {
 
 	public void opProjetista() {
 		Projetista p = new Projetista("a","a");
+		Login l = new Login();
+		l.setProjetista(p);
+		p.setLogin(l);
+
+		l.setSenha("lulala");
+		l.setUsuario("aranha");
 		projetistaRep.save(p);
 	}
 }

@@ -19,7 +19,7 @@ class LbeGerenciadorDeProjetoSimplesApplicationTests {
 	@Test
 	void contextLoads() {
 //		pCon.opProjeto();
-//		projetistaCon.opProjetista();
+		projetistaCon.opProjetista();
 	}
 
 }

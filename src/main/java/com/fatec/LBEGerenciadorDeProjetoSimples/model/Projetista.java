@@ -6,6 +6,7 @@ import java.util.Set;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -37,13 +38,13 @@ public class Projetista {
 	
 	@Column(name = "nome", length = 100, nullable = false)
 	private String nome;
-	
-    @OneToOne(mappedBy = "projetista",cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
-    private Login login;
     
-	@OneToMany(mappedBy = "projetista")
-	private Set<Equipe> equipe;
+//	@OneToMany(mappedBy = "projetista")
+//	private Set<Equipe> equipe;
+//	
+	@OneToOne(mappedBy = "projetista", cascade = CascadeType.ALL)
+	@PrimaryKeyJoinColumn
+	private Login login;
 	
 	public Projetista(String email, String nome) {
 		super();

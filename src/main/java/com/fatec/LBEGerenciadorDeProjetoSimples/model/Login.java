@@ -3,6 +3,8 @@ package com.fatec.LBEGerenciadorDeProjetoSimples.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.MapsId;
@@ -24,7 +26,8 @@ import lombok.ToString;
 public class Login {
 	
 	@Id
-    @Column(name = "projetista_id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "projetista_id", nullable = false)
     private int id;
 	
 	@Column(name = "usuario",length = 80, nullable = false)
@@ -34,7 +37,7 @@ public class Login {
 	private String senha;
 	
 	@OneToOne
-	@MapsId
 	@JoinColumn(name = "projetista_id")
+	@MapsId
     private Projetista projetista;
 }
