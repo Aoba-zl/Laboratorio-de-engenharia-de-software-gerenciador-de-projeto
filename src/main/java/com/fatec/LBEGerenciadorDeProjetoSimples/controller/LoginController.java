@@ -19,16 +19,17 @@ public class LoginController {
 	@Autowired
 	private ILoginRepository loginRep;
 	
-	@RequestMapping(name = "projetistaLogin", value = "/projetistaLogin", method = RequestMethod.GET)
+	@RequestMapping(name = "login", value = "/login", method = RequestMethod.GET)
 	public ModelAndView projetoGet(ModelMap model) {
 		
-		return new ModelAndView("projetistaLogin");
+		return new ModelAndView("login");
 	}
-	@RequestMapping(name = "projetistaLogin", value = "/projetistaLogin", method = RequestMethod.POST)
+	@RequestMapping(name = "login", value = "/login", method = RequestMethod.POST)
 	public ModelAndView projetoPost(@RequestParam Map<String, String> allRequestParam) {
 		
-		return new ModelAndView("projetistaLogin");
+		return new ModelAndView("login");
 	}
+	
 	public boolean verificarLogin (Login login) {
 		return false;
 		
