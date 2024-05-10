@@ -38,11 +38,13 @@ public class ProjetistaController {
 		return new ModelAndView("projetista");
 	}
 	public String cadastrar(String acao, Projetista projetista) {
-		return null;
+		projetistaRep.save(projetista);
+		return "Projetisca Cadastrado";
 		
 	}
 	public String atualizar(String acao, Projetista projetista) {
-		return null;
+		projetistaRep.save(projetista);
+		return "Projetisca Atualizado";
 		
 	}
 	public String deletar(String acao, Projetista projetista) {
