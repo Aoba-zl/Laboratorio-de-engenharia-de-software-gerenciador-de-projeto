@@ -27,7 +27,7 @@ public class LoginController {
 	@RequestMapping(name = "login", value = "/login", method = RequestMethod.POST)
 	public ModelAndView projetoPost(@RequestParam Map<String, String> allRequestParam) {
 		
-		return new ModelAndView("login");
+		return new ModelAndView("redirect:/projeto");
 	}
 	
 	public boolean verificarLogin (Login login) {

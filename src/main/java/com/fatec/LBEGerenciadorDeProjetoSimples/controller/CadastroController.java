@@ -27,6 +27,6 @@ public class CadastroController {
 	@RequestMapping(name = "cadastro", value = "/cadastro", method = RequestMethod.POST)
 	public ModelAndView projetoPost(@RequestParam Map<String, String> allRequestParam) {
 		
-		return new ModelAndView("cadastro");
+		return new ModelAndView("redirect:/login");
 	}
 }
