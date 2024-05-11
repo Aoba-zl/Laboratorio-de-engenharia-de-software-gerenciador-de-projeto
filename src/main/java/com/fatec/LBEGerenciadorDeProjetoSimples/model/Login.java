@@ -40,4 +40,11 @@ public class Login {
 	@JoinColumn(name = "projetista_id")
 	@MapsId
     private Projetista projetista;
+
+	public Login(String usuario, String senha, Projetista projetista) {
+		super();
+		this.usuario = usuario;
+		this.senha = senha;
+		this.projetista = projetista;
+	}
 }

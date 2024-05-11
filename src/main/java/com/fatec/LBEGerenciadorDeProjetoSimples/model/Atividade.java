@@ -2,6 +2,7 @@ package com.fatec.LBEGerenciadorDeProjetoSimples.model;
 
 import java.time.LocalDate;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -40,12 +41,13 @@ public class Atividade {
 	private String nome;
 	
 	@Id
-    @ManyToOne(targetEntity = Projeto.class, fetch = FetchType.LAZY)
-    @JoinColumn(name = "projetoid",nullable = false)
-    private Projeto projeto;
+	@ManyToOne(cascade = CascadeType.ALL, targetEntity = Projeto.class, fetch = FetchType.LAZY)
+	@JoinColumn(name = "projetoId", nullable = false)
+	private Projeto projeto;
 	
-	public Atividade(LocalDate dataInicial, LocalDate dataFinal, String descricao, String nome) {
+	public Atividade(Projeto projeto,LocalDate dataInicial, LocalDate dataFinal, String descricao, String nome) {
 		super();
+		this.projeto = projeto;
 		this.dataInicial = dataInicial;
 		this.dataFinal = dataFinal;
 		this.descricao = descricao;

@@ -27,6 +27,7 @@ public class AtividadeController {
 	@Autowired
 	private IAtividadeRepository atividadeRep;
 	
+	
 	@RequestMapping(name = "atividade", value = "/atividade", method = RequestMethod.GET)
 	public ModelAndView projetoGet(ModelMap model) {
 		
@@ -61,12 +62,6 @@ public class AtividadeController {
 		
 	}
 	public void opAtividade() {
-		Atividade a = new Atividade(LocalDate.now(),LocalDate.now(),"a","nome");
-		
-		Projeto p = new Projeto("lacração",LocalDate.now(), LocalDate.now(),"a");
-		projetoRep.save(p);
-		a.setProjeto(p);
-		
-		atividadeRep.save(a);
+
 	}
 }

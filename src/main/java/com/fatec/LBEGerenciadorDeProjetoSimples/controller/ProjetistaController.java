@@ -56,14 +56,4 @@ public class ProjetistaController {
 		
 	}
 
-	public void opProjetista() {
-		Projetista p = new Projetista("a","a");
-		Login l = new Login();
-		l.setProjetista(p);
-		p.setLogin(l);
-
-		l.setSenha("lulala");
-		l.setUsuario("aranha");
-		projetistaRep.save(p);
-	}
 }

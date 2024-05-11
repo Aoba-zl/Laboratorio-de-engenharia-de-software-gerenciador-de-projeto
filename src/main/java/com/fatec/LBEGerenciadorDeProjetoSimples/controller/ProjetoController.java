@@ -74,7 +74,8 @@ public class ProjetoController {
 	}
 	
 	public String cadastrar(String acao, Projeto projeto) {
-		return null;
+		projetoRep.save(projeto);
+		return "Projeto Cadastrado";
 		
 	}
 	public String atualizar(String acao, Projeto projeto) {
@@ -92,9 +93,5 @@ public class ProjetoController {
 	public List<Projeto> listar(){
 		return null;
 		
-	}
-	public void opProjeto() {
-		Projeto p = new Projeto("lacração",LocalDate.now(), LocalDate.now(),"a");
-		projetoRep.save(p);
 	}
 }
