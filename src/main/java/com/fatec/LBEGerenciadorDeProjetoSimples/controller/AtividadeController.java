@@ -1,5 +1,6 @@
 package com.fatec.LBEGerenciadorDeProjetoSimples.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -12,14 +13,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fatec.LBEGerenciadorDeProjetoSimples.model.Atividade;
+import com.fatec.LBEGerenciadorDeProjetoSimples.model.Projeto;
 import com.fatec.LBEGerenciadorDeProjetoSimples.repository.IAtividadeRepository;
 import com.fatec.LBEGerenciadorDeProjetoSimples.repository.IProjetoRepository;
 @Controller
+
 public class AtividadeController {
+	@Autowired
 	private LoginController lController;
 	
 	@Autowired
 	private IProjetoRepository projetoRep;
+	@Autowired
 	private IAtividadeRepository atividadeRep;
 	
 	@RequestMapping(name = "atividade", value = "/atividade", method = RequestMethod.GET)
@@ -51,7 +56,17 @@ public class AtividadeController {
 		
 	}
 	public List<Atividade> listar(){
+		projetoRep.save(null);
 		return null;
 		
+	}
+	public void opAtividade() {
+		Atividade a = new Atividade(LocalDate.now(),LocalDate.now(),"a","nome");
+		
+		Projeto p = new Projeto("lacração",LocalDate.now(), LocalDate.now(),"a");
+		projetoRep.save(p);
+		a.setProjeto(p);
+		
+		atividadeRep.save(a);
 	}
 }

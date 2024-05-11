@@ -5,16 +5,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.fatec.LBEGerenciadorDeProjetoSimples.controller.ProjetistaController;
+import com.fatec.LBEGerenciadorDeProjetoSimples.controller.ProjetoController;
 
 @SpringBootTest
 class LbeGerenciadorDeProjetoSimplesApplicationTests {
 	
 	@Autowired
-	private ProjetistaController pCon;
-
+	private ProjetoController pCon;
+	
+	@Autowired 
+	private ProjetistaController projetistaCon;
+	
 	@Test
 	void contextLoads() {
-		//pCon.opProjetista();
+//		pCon.opProjeto();
+		projetistaCon.opProjetista();
 	}
 
 }
