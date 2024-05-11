@@ -39,9 +39,9 @@ public class Projetista {
 	@Column(name = "nome", length = 100, nullable = false)
 	private String nome;
     
-//	@OneToMany(mappedBy = "projetista")
-//	private Set<Equipe> equipe;
-//	
+	@OneToMany(mappedBy = "projetista")
+	private Set<Equipe> equipe;
+	
 	@OneToOne(mappedBy = "projetista", cascade = CascadeType.ALL)
 	@PrimaryKeyJoinColumn
 	private Login login;

@@ -1,4 +1,4 @@
-package com.fatec.LBEGerenciadorDeProjetoSimples.model;
+		package com.fatec.LBEGerenciadorDeProjetoSimples.model;
 
 
 import jakarta.persistence.Column;
