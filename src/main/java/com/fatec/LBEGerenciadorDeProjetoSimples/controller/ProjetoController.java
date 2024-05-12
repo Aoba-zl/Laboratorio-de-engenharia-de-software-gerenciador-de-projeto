@@ -4,8 +4,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +21,7 @@ import com.fatec.LBEGerenciadorDeProjetoSimples.repository.IEquipeRepository;
 import com.fatec.LBEGerenciadorDeProjetoSimples.repository.IProjetistaRepository;
 import com.fatec.LBEGerenciadorDeProjetoSimples.repository.IProjetoRepository;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.websocket.server.PathParam;
 
 @Controller
@@ -32,6 +35,7 @@ public class ProjetoController {
 	@Autowired
 	private IEquipeRepository equipeRep;
 	
+	// teria que fazer um listar especializado onde ele só puxa projetos em que a pessoa esta
 	@RequestMapping(name = "projeto", value = "/projeto", method = RequestMethod.GET)
 	public ModelAndView projetoGet(ModelMap model) {
 		List<Projeto> projetos = listar();
@@ -40,8 +44,18 @@ public class ProjetoController {
 	}
 	
 	@RequestMapping(name = "projeto", value = "/projeto", method = RequestMethod.POST)
-	public ModelAndView projetoPost(@RequestParam Map<String, String> allRequestParam) {
-		
+	public ModelAndView projetoPost(@RequestParam Map<String, String> allRequestParam, ModelMap model) {
+		String cmd = allRequestParam.get("botao");
+//		if (cmd == "Excluir") {
+		String botao = allRequestParam.get("botaoId");
+			System.out.println(1);
+//			Projeto projeto = new Projeto();
+//			projeto.setId(id);
+//			projeto = consultar(projeto);
+//			deletar("D",projeto);
+//		}
+		List<Projeto> projetos = listar();
+		model.addAttribute("projetos",projetos);
 		return new ModelAndView("projeto");
 	}
 	
@@ -51,6 +65,7 @@ public class ProjetoController {
 		return new ModelAndView("projeto-adicionar");
 	}
 	
+	// Precisa fazer ela adicionar a equipe tbm
 	@RequestMapping(name = "projeto-adicionar", value = "/projeto/adicionar-projeto", method = RequestMethod.POST)
 	public ModelAndView projetoAddPost(@RequestParam Map<String, String> allRequestParam) {
 		String nome = allRequestParam.get("nomeProjeto").trim();
@@ -66,22 +81,33 @@ public class ProjetoController {
 		return new ModelAndView("redirect:/projeto");
 	}
 	
+	// Precisa receber Projeto como uma variavel, pode ser só o id  (tavez com section)
 	@RequestMapping(name = "projeto-atualizar", value = "/projeto/atualizar/{codigo}", method = RequestMethod.GET)
 	public ModelAndView projetoAtualizarGet(@PathVariable("codigo") int codigo, @RequestParam Map<String, String> allRequestParam) {
 		
 		return new ModelAndView("projeto-atualizar");
 	}
 	
+	// Precisa ter certeza de receber o id do projeto que esta sendo atualizado
 	@RequestMapping(name = "projeto-atualizar", value = "/projeto/atualizar/{codigo}", method = RequestMethod.POST)
 	public ModelAndView projetoAtualizarPost(@PathVariable("codigo") int codigo, @RequestParam Map<String, String> allRequestParam) {
-		System.out.println(codigo);
+		String nome = allRequestParam.get("nomeProjeto").trim();
+		String inical = allRequestParam.get("dataInicial");
+		String fina = allRequestParam.get("dataFinal");
+		String descricao = allRequestParam.get("descricao").trim();
+		
+		LocalDate dInicial = toLocalDate(inical);
+		LocalDate dFinal = toLocalDate(fina);
+		
+		Projeto p = new Projeto(nome,dInicial,dFinal,descricao);
+		cadastrar("d", p);
 		return new ModelAndView("redirect:/projeto");
 	}
 	
 	@RequestMapping(name = "projeto-excluir", value = "/projeto/excluir/{codigo}", method = RequestMethod.POST)
 	public ModelAndView projetoExcluirPost(@PathVariable("codigo") int codigo) {
 		
-		return new ModelAndView("redirect:/projeto");
+		return new ModelAndView("projeto");
 	}
 	
 	public String cadastrar(String acao, Projeto projeto) {
@@ -89,15 +115,18 @@ public class ProjetoController {
 		return "Projeto Cadastrado";
 	}
 	public String atualizar(String acao, Projeto projeto) {
-		return null;
+		projetoRep.save(projeto);
+		return "Projeto Atualizado";
 		
 	}
 	public String deletar(String acao, Projeto projeto) {
-		return null;
+		projetoRep.sp_del_projeto(projeto.getId());
+		return "Projeto Excluido";
 		
 	}
 	public Projeto consultar(Projeto projeto) {
-		return null;
+		Optional<Projeto> p = projetoRep.findById(projeto.getId());
+		return p.get();
 		
 	}
 	public List<Projeto> listar() {
