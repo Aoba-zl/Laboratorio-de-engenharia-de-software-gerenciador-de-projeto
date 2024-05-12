@@ -63,4 +63,14 @@ public class Projeto {
 		this.dataFinal = dataFinal;
 		this.descricao = descricao;
 	}
+
+	public Projeto(int id, String nome, LocalDate dataInicial, LocalDate dataFinal, String descricao) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.dataInicial = dataInicial;
+		this.dataFinal = dataFinal;
+		this.descricao = descricao;
+	}
+	
 }

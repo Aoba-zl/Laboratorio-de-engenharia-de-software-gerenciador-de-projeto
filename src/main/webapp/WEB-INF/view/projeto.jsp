@@ -37,7 +37,7 @@
 								<td><c:out value="${p.descricao}"/></td>
 								<td style="max-width: 24px; min-width: 50px">
 									<form action="./projeto/atualizar/1" method="get">
-										<button class="btn btn-success" name="botao" >Atualizar</button>
+										<button class="btn btn-success" value="${p.id} name="botao" >Atualizar</button>
 									</form>
 								</td>
 								<td style="max-width: 24px; min-width: 50px">

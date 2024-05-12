@@ -80,33 +80,33 @@ public class ProjetoController {
 		return new ModelAndView("redirect:/projeto");
 	}
 	
-	// Precisa receber Projeto como uma variavel, pode ser só o id  (tavez com section)
 	@RequestMapping(name = "projeto-atualizar", value = "/projeto/atualizar/{codigo}", method = RequestMethod.GET)
-	public ModelAndView projetoAtualizarGet(@PathVariable("codigo") int codigo, @RequestParam Map<String, String> allRequestParam) {
-		
+	public ModelAndView projetoAtualizarGet(@PathVariable("codigo") int codigo, @RequestParam Map<String, String> allRequestParam, ModelMap model) {
+		Projeto projeto = new Projeto();
+		projeto.setId(codigo);
+		projeto = consultar(projeto);
+		model.addAttribute("projeto",projeto);
 		return new ModelAndView("projeto-atualizar");
 	}
 	
-	// Precisa ter certeza de receber o id do projeto que esta sendo atualizado
 	@RequestMapping(name = "projeto-atualizar", value = "/projeto/atualizar/{codigo}", method = RequestMethod.POST)
-	public ModelAndView projetoAtualizarPost(@PathVariable("codigo") int codigo, @RequestParam Map<String, String> allRequestParam) {
+	public ModelAndView projetoAtualizarPost(@PathVariable("codigo") int codigo, @RequestParam Map<String, String> allRequestParam, ModelMap model) {
 		String nome = allRequestParam.get("nomeProjeto").trim();
 		String inical = allRequestParam.get("dataInicial");
 		String fina = allRequestParam.get("dataFinal");
 		String descricao = allRequestParam.get("descricao").trim();
-		
 		LocalDate dInicial = toLocalDate(inical);
 		LocalDate dFinal = toLocalDate(fina);
-		
-		Projeto p = new Projeto(nome,dInicial,dFinal,descricao);
-		cadastrar("d", p);
+		Projeto projeto = new Projeto();
+		projeto.setId(codigo);
+		projeto = consultar(projeto);
+		projeto.setNome(nome);
+		projeto.setDataInicial(dInicial);
+		projeto.setDataFinal(dFinal);
+		projeto.setDescricao(descricao);
+
+		atualizar("a", projeto);
 		return new ModelAndView("redirect:/projeto");
-	}
-	
-	@RequestMapping(name = "projeto-excluir", value = "/projeto/excluir/{codigo}", method = RequestMethod.POST)
-	public ModelAndView projetoExcluirPost(@PathVariable("codigo") int codigo) {
-		
-		return new ModelAndView("projeto");
 	}
 	
 	public String cadastrar(String acao, Projeto projeto) {
