@@ -24,7 +24,7 @@ public class ProjetistaController {
 	@Autowired
 	private IEquipeRepository equipeRep;
 	@Autowired
-	ILoginRepository loginRep;
+	private ILoginRepository loginRep;
 	
 	@RequestMapping(name = "projetista", value = "/projetista", method = RequestMethod.GET)
 	public ModelAndView projetoGet(ModelMap model) {
@@ -37,6 +37,25 @@ public class ProjetistaController {
 		
 		return new ModelAndView("projetista");
 	}
+	
+	@RequestMapping(name = "cadastro", value = "/cadastro", method = RequestMethod.GET)
+	public ModelAndView projetistaAddGet(ModelMap model) {
+		
+		return new ModelAndView("cadastro");
+	}
+	@RequestMapping(name = "cadastro", value = "/cadastro", method = RequestMethod.POST)
+	public ModelAndView projetistaAddPost(@RequestParam Map<String, String> allRequestParam) {
+		String usuario = allRequestParam.get("nomeUsuario").trim();
+		String senha = allRequestParam.get("senha").trim();
+		String email = allRequestParam.get("email").trim();
+		String nome = allRequestParam.get("nome").trim();
+		Projetista pro = new Projetista(email,nome);
+		Login l = new Login(usuario,senha,pro);
+		pro.setLogin(l);
+		cadastrar("C", pro);
+		return new ModelAndView("redirect:/login");
+	}
+	
 	public String cadastrar(String acao, Projetista projetista) {
 		projetistaRep.save(projetista);
 		return "Projetisca Cadastrado";
