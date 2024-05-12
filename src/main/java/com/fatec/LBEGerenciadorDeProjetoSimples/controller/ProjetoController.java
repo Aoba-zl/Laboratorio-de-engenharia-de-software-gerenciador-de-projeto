@@ -46,14 +46,13 @@ public class ProjetoController {
 	@RequestMapping(name = "projeto", value = "/projeto", method = RequestMethod.POST)
 	public ModelAndView projetoPost(@RequestParam Map<String, String> allRequestParam, ModelMap model) {
 		String cmd = allRequestParam.get("botao");
-//		if (cmd == "Excluir") {
-		String botao = allRequestParam.get("botaoId");
-			System.out.println(1);
-//			Projeto projeto = new Projeto();
-//			projeto.setId(id);
-//			projeto = consultar(projeto);
-//			deletar("D",projeto);
-//		}
+		int id = Integer.parseInt(allRequestParam.get("botaoId"));
+		if (cmd.contains("Excluir")) {
+			Projeto projeto = new Projeto();
+			projeto.setId(id);
+			projeto = consultar(projeto);
+			deletar("D",projeto);
+		}
 		List<Projeto> projetos = listar();
 		model.addAttribute("projetos",projetos);
 		return new ModelAndView("projeto");

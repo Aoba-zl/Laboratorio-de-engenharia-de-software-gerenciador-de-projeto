@@ -1,6 +1,7 @@
 package com.fatec.LBEGerenciadorDeProjetoSimples;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +48,8 @@ class LbeGerenciadorDeProjetoSimplesApplicationTests {
 		projetistaCon.cadastrar("c", pro);
 		atividadeRep.save(a);
 		equipeRep.save(e);
+		
+		List<Projeto> projetos = pCon.listar();
 	}
 
 }

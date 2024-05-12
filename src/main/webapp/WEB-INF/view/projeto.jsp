@@ -41,9 +41,9 @@
 									</form>
 								</td>
 								<td style="max-width: 24px; min-width: 50px">
-									<button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal"> Excluir </button>
+									<button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal${p.id}"> Excluir </button>
 
-									<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+									<div class="modal fade" id="deleteModal${p.id}" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
 										<div class="modal-dialog">
 										 	<div class="modal-content">
 											 	<div class="modal-header">
@@ -53,8 +53,8 @@
 												<div class="modal-footer">
 													<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
 													<form action="projeto" method="post">
-														<button name="botao" class="btn btn-danger" >Excluir</button>
-														<input type="hidden" name="botaoId" <c:out value="${p.id}"/>>
+														<button name="botao" value="Excluir" class="btn btn-danger" >Excluir</button>
+														<input type="hidden" name="botaoId" value="${p.id}">
 													</form>
 												</div>
 											</div>
