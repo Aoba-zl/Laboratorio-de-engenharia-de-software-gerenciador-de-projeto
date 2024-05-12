@@ -37,13 +37,11 @@ class LbeGerenciadorDeProjetoSimplesApplicationTests {
 		Projetista pro = new Projetista("a","a");
 		Login l = new Login("lulala","aranha",pro);
 		pro.setLogin(l);
-		
 
 		Projeto p = new Projeto("lacração",LocalDate.now(), LocalDate.now(),"a");
 		Atividade a = new Atividade(p,LocalDate.now(),LocalDate.now(),"a","nome");
 		
 		Equipe e = new Equipe(pro, p);
-		
 		
 		pCon.cadastrar("c",p);
 		projetistaCon.cadastrar("c", pro);

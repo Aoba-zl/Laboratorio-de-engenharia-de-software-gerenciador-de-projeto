@@ -1,6 +1,7 @@
 package com.fatec.LBEGerenciadorDeProjetoSimples.controller;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -33,7 +34,8 @@ public class ProjetoController {
 	
 	@RequestMapping(name = "projeto", value = "/projeto", method = RequestMethod.GET)
 	public ModelAndView projetoGet(ModelMap model) {
-		
+		List<Projeto> projetos = listar();
+		model.addAttribute("projetos",projetos);
 		return new ModelAndView("projeto");
 	}
 	
@@ -51,7 +53,16 @@ public class ProjetoController {
 	
 	@RequestMapping(name = "projeto-adicionar", value = "/projeto/adicionar-projeto", method = RequestMethod.POST)
 	public ModelAndView projetoAddPost(@RequestParam Map<String, String> allRequestParam) {
+		String nome = allRequestParam.get("nomeProjeto").trim();
+		String inical = allRequestParam.get("dataInicial");
+		String fina = allRequestParam.get("dataFinal");
+		String descricao = allRequestParam.get("descricao").trim();
 		
+		LocalDate dInicial = toLocalDate(inical);
+		LocalDate dFinal = toLocalDate(fina);
+		
+		Projeto p = new Projeto(nome,dInicial,dFinal,descricao);
+		cadastrar("d", p);
 		return new ModelAndView("redirect:/projeto");
 	}
 	
@@ -76,7 +87,6 @@ public class ProjetoController {
 	public String cadastrar(String acao, Projeto projeto) {
 		projetoRep.save(projeto);
 		return "Projeto Cadastrado";
-		
 	}
 	public String atualizar(String acao, Projeto projeto) {
 		return null;
@@ -90,8 +100,13 @@ public class ProjetoController {
 		return null;
 		
 	}
-	public List<Projeto> listar(){
-		return null;
+	public List<Projeto> listar() {
+		return projetoRep.findAll();
+	}
+	
+	private LocalDate toLocalDate (String data) {
+		LocalDate localdate = LocalDate.parse(data);
+		return localdate;
 		
 	}
 }

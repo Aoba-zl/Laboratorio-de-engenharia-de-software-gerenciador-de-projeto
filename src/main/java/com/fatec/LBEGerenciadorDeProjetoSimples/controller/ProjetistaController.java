@@ -40,12 +40,10 @@ public class ProjetistaController {
 	public String cadastrar(String acao, Projetista projetista) {
 		projetistaRep.save(projetista);
 		return "Projetisca Cadastrado";
-		
 	}
 	public String atualizar(String acao, Projetista projetista) {
 		projetistaRep.save(projetista);
 		return "Projetisca Atualizado";
-		
 	}
 	public String deletar(String acao, Projetista projetista) {
 		return null;
