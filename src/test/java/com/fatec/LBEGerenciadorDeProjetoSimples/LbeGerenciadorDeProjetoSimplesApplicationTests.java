@@ -16,6 +16,7 @@ import com.fatec.LBEGerenciadorDeProjetoSimples.model.Projetista;
 import com.fatec.LBEGerenciadorDeProjetoSimples.model.Projeto;
 import com.fatec.LBEGerenciadorDeProjetoSimples.repository.IAtividadeRepository;
 import com.fatec.LBEGerenciadorDeProjetoSimples.repository.IEquipeRepository;
+import com.fatec.LBEGerenciadorDeProjetoSimples.repository.ILoginRepository;
 
 @SpringBootTest
 class LbeGerenciadorDeProjetoSimplesApplicationTests {
@@ -32,24 +33,30 @@ class LbeGerenciadorDeProjetoSimplesApplicationTests {
 	@Autowired
 	private IAtividadeRepository atividadeRep;
 	
+	@Autowired
+	private ILoginRepository lrep;
+	
 	@Test
 	void contextLoads() {
 		
-		Projetista pro = new Projetista("a","a");
-		Login l = new Login("lulala","aranha",pro);
-		pro.setLogin(l);
-
-		Projeto p = new Projeto("lacração",LocalDate.now(), LocalDate.now(),"a");
-		Atividade a = new Atividade(p,LocalDate.now(),LocalDate.now(),"a","nome");
-		
-		Equipe e = new Equipe(pro, p);
-		
-		pCon.cadastrar("c",p);
-		projetistaCon.cadastrar(pro);
-		atividadeRep.save(a);
-		equipeRep.save(e);
-		
-		List<Projeto> projetos = pCon.listar();
+//		Projetista pro = new Projetista("a","a");
+//		Login l = new Login("lulala","aranha",pro);
+//		pro.setLogin(l);
+//
+//		Projeto p = new Projeto("lacração",LocalDate.now(), LocalDate.now(),"a");
+//		Atividade a = new Atividade(p,LocalDate.now(),LocalDate.now(),"a","nome");
+//		
+//		Equipe e = new Equipe(pro, p);
+//		
+//		pCon.cadastrar("c",p);
+//		projetistaCon.cadastrar(pro);
+//		atividadeRep.save(a);
+//		equipeRep.save(e);
+//		
+//		List<Projeto> projetos = pCon.listar();
+		Login login = new Login();
+		login = lrep.fn_login(null);
+		System.out.println(login);
 	}
 
 }

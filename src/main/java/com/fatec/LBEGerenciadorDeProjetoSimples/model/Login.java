@@ -8,6 +8,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.MapsId;
+import jakarta.persistence.NamedNativeQuery;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -23,6 +24,11 @@ import lombok.ToString;
 @ToString
 @Entity
 @Table(name = "login")
+@NamedNativeQuery(
+		name = "Login_fn_login",
+		query = "SELECT projetista_id, usuario, senha FROM fn_login(?1)",
+		resultClass = Login.class
+)
 public class Login {
 	
 	@Id
