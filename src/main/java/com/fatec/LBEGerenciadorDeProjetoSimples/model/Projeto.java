@@ -8,6 +8,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.NamedNativeQuery;
 import jakarta.persistence.NamedStoredProcedureQuery;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.ParameterMode;
@@ -31,6 +32,11 @@ import lombok.ToString;
 				@StoredProcedureParameter(mode = ParameterMode.IN,
 					name = "id", type = Integer.class),
 		}
+)
+@NamedNativeQuery(
+		name = "Projeto_fn_projeto",
+		query = "SELECT * FROM fn_projeto(?1)",
+		resultClass = Projeto.class
 )
 public class Projeto {
 	@Id

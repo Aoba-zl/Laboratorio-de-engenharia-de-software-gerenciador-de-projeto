@@ -14,18 +14,24 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fatec.LBEGerenciadorDeProjetoSimples.model.Equipe;
+import com.fatec.LBEGerenciadorDeProjetoSimples.model.Login;
+import com.fatec.LBEGerenciadorDeProjetoSimples.model.Projetista;
 import com.fatec.LBEGerenciadorDeProjetoSimples.model.Projeto;
 import com.fatec.LBEGerenciadorDeProjetoSimples.repository.IEquipeRepository;
 import com.fatec.LBEGerenciadorDeProjetoSimples.repository.IProjetistaRepository;
 import com.fatec.LBEGerenciadorDeProjetoSimples.repository.IProjetoRepository;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import jakarta.websocket.server.PathParam;
 
 @Controller
 public class ProjetoController {
+	@Autowired
 	private LoginController lController;
 	
 	@Autowired
@@ -35,10 +41,15 @@ public class ProjetoController {
 	@Autowired
 	private IEquipeRepository equipeRep;
 	
-	// teria que fazer um listar especializado onde ele só puxa projetos em que a pessoa esta
 	@RequestMapping(name = "projeto", value = "/projeto", method = RequestMethod.GET)
-	public ModelAndView projetoGet(ModelMap model) {
-		List<Projeto> projetos = listar();
+	public ModelAndView projetoGet(ModelMap model ,HttpServletRequest request) {
+
+		if(!lController.verificarLogin(request)) {
+			 return new ModelAndView("redirect:/login");
+		}
+		HttpSession session = request.getSession(false);
+		Login login = (Login) session.getAttribute("login");
+		List<Projeto> projetos = projetoRep.fn_projeto(login.getId());
 		model.addAttribute("projetos",projetos);
 		return new ModelAndView("projeto");
 	}
@@ -59,14 +70,17 @@ public class ProjetoController {
 	}
 	
 	@RequestMapping(name = "projeto-adicionar", value = "/projeto/adicionar-projeto", method = RequestMethod.GET)
-	public ModelAndView projetoAddGet(@RequestParam Map<String, String> allRequestParam) {
-		
+	public ModelAndView projetoAddGet(@RequestParam Map<String, String> allRequestParam,HttpServletRequest request) {
+		 if(!lController.verificarLogin(request)) {
+			 return new ModelAndView("redirect:/login");
+		 }
 		return new ModelAndView("projeto-adicionar");
 	}
 	
 	// Precisa fazer ela adicionar a equipe tbm
 	@RequestMapping(name = "projeto-adicionar", value = "/projeto/adicionar-projeto", method = RequestMethod.POST)
-	public ModelAndView projetoAddPost(@RequestParam Map<String, String> allRequestParam) {
+	public ModelAndView projetoAddPost(@RequestParam Map<String, String> allRequestParam,HttpServletRequest request) {
+		 HttpSession session = request.getSession(false);
 		String nome = allRequestParam.get("nomeProjeto").trim();
 		String inical = allRequestParam.get("dataInicial");
 		String fina = allRequestParam.get("dataFinal");
@@ -74,14 +88,17 @@ public class ProjetoController {
 		
 		LocalDate dInicial = toLocalDate(inical);
 		LocalDate dFinal = toLocalDate(fina);
-		
+		Login login = (Login) session.getAttribute("login");
 		Projeto p = new Projeto(nome,dInicial,dFinal,descricao);
-		cadastrar("d", p);
+		cadastrar(login, p);
 		return new ModelAndView("redirect:/projeto");
 	}
 	
 	@RequestMapping(name = "projeto-atualizar", value = "/projeto/atualizar/{codigo}", method = RequestMethod.GET)
-	public ModelAndView projetoAtualizarGet(@PathVariable("codigo") int codigo, @RequestParam Map<String, String> allRequestParam, ModelMap model) {
+	public ModelAndView projetoAtualizarGet(@PathVariable("codigo") int codigo, @RequestParam Map<String, String> allRequestParam, ModelMap model,HttpServletRequest request) {
+		 if(!lController.verificarLogin(request)) {
+			 return new ModelAndView("redirect:/login");
+		 }
 		Projeto projeto = new Projeto();
 		projeto.setId(codigo);
 		projeto = consultar(projeto);
@@ -109,8 +126,11 @@ public class ProjetoController {
 		return new ModelAndView("redirect:/projeto");
 	}
 	
-	public String cadastrar(String acao, Projeto projeto) {
+	public String cadastrar(Login login, Projeto projeto) {
 		projetoRep.save(projeto);
+		Optional<Projetista> o = projetistaRep.findById(login.getId());
+		Equipe equipe = new Equipe(o.get(),projeto);
+		equipeRep.save(equipe);
 		return "Projeto Cadastrado";
 	}
 	public String atualizar(String acao, Projeto projeto) {

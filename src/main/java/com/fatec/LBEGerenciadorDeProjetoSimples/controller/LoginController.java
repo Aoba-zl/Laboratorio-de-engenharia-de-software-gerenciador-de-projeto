@@ -23,9 +23,12 @@ public class LoginController {
 	private ILoginRepository loginRep;
 	
 	@RequestMapping(name = "login", value = "/login", method = RequestMethod.GET)
-	public ModelAndView projetoGet(ModelMap model) {
-		
-		return new ModelAndView("login");
+	public ModelAndView projetoGet(ModelMap model,HttpServletRequest request) {
+		 HttpSession session = request.getSession(false);
+		 if (session != null) {
+			 session.removeAttribute("login");
+		 }
+		 return new ModelAndView("login");
 	}
 	@RequestMapping(name = "login", value = "/login", method = RequestMethod.POST)
 	public ModelAndView projetoPost(@RequestParam Map<String, String> allRequestParam,HttpServletRequest request) {
@@ -40,12 +43,16 @@ public class LoginController {
 		return new ModelAndView("login");
 	}
 	
-	public boolean verificarLogin (Login login) {
-		if (login == null) {
-			return false;
-		}
-		login = loginRep.fn_login(login.getUsuario());
-		return true;
+	public boolean verificarLogin (HttpServletRequest request) {
+		 HttpSession session = request.getSession(false);
+		 if (session == null) {
+			 return false;
+		 }
+		 Login login = (Login) session.getAttribute("login");
+		 if (login == null) {
+			 return false;
+		 }
+		 return true;
 	}
 	private boolean validar (String usuario, String senha) {
 		if(usuario == "" || usuario.length() > 80) {return false;}

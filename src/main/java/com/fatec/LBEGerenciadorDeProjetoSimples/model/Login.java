@@ -26,7 +26,7 @@ import lombok.ToString;
 @Table(name = "login")
 @NamedNativeQuery(
 		name = "Login_fn_login",
-		query = "SELECT projetista_id, usuario, senha FROM fn_login(?1)",
+		query = "SELECT * FROM fn_login(?1)",
 		resultClass = Login.class
 )
 public class Login {
