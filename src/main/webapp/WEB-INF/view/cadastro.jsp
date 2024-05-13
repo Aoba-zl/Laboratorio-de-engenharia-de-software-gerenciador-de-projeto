@@ -34,7 +34,7 @@
 					<label for="floatinInput" class="font-text">Nome</label>
 				</div>
 				<div class="d-flex">
-					<button class="btn btn-secondary ms-auto mt-2" href="./login">Confirmar Cadastro</button>
+					<button class="btn btn-secondary ms-auto mt-2" >Confirmar Cadastro</button>
 				</div>
 			</form>
 		</div>

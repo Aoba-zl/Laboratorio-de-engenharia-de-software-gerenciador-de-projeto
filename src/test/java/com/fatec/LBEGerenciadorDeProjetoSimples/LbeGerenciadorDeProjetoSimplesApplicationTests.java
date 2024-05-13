@@ -45,7 +45,7 @@ class LbeGerenciadorDeProjetoSimplesApplicationTests {
 		Equipe e = new Equipe(pro, p);
 		
 		pCon.cadastrar("c",p);
-		projetistaCon.cadastrar("c", pro);
+		projetistaCon.cadastrar(pro);
 		atividadeRep.save(a);
 		equipeRep.save(e);
 		

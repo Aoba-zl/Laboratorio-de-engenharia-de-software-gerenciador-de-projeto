@@ -2,6 +2,7 @@ package com.fatec.LBEGerenciadorDeProjetoSimples.controller;
 
 import java.util.Map;
 
+import org.hibernate.Length;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -49,22 +50,25 @@ public class ProjetistaController {
 		String senha = allRequestParam.get("senha").trim();
 		String email = allRequestParam.get("email").trim();
 		String nome = allRequestParam.get("nome").trim();
-		Projetista pro = new Projetista(email,nome);
-		Login l = new Login(usuario,senha,pro);
-		pro.setLogin(l);
-		cadastrar("C", pro);
-		return new ModelAndView("redirect:/login");
+		if(validarCadastro(usuario,senha,email,nome)) {
+			Projetista pro = new Projetista(email,nome);
+			Login l = new Login(usuario,senha,pro);
+			pro.setLogin(l);
+			cadastrar(pro);
+			return new ModelAndView("redirect:/login");
+		}
+		return new ModelAndView("cadastro");
 	}
 	
-	public String cadastrar(String acao, Projetista projetista) {
+	public String cadastrar(Projetista projetista) {
 		projetistaRep.save(projetista);
 		return "Projetisca Cadastrado";
 	}
-	public String atualizar(String acao, Projetista projetista) {
+	public String atualizar(Projetista projetista) {
 		projetistaRep.save(projetista);
 		return "Projetisca Atualizado";
 	}
-	public String deletar(String acao, Projetista projetista) {
+	public String deletar(Projetista projetista) {
 		return null;
 		
 	}
@@ -72,5 +76,11 @@ public class ProjetistaController {
 		return null;
 		
 	}
-
+	private boolean validarCadastro(String usuario,String senha,String email,String nome) {
+		if(usuario == "" || usuario.length() > 80) {return false;}
+		if(senha == "" || senha.length() > 30) {return false;}
+		if(email == "" || email.length() >50) {return false;}
+		if(nome == "" || nome.length() >100) {return false;}
+		return true;
+	}
 }

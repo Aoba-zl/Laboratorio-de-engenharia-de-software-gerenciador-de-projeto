@@ -30,7 +30,7 @@ public class Login {
     @Column(name = "projetista_id", nullable = false)
     private int id;
 	
-	@Column(name = "usuario",length = 80, nullable = false)
+	@Column(name = "usuario",length = 80, nullable = false, unique = true)
 	private String usuario;
 	
 	@Column(name = "senha",length = 30, nullable = false)
