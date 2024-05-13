@@ -77,7 +77,6 @@ public class ProjetoController {
 		return new ModelAndView("projeto-adicionar");
 	}
 	
-	// Precisa fazer ela adicionar a equipe tbm
 	@RequestMapping(name = "projeto-adicionar", value = "/projeto/adicionar-projeto", method = RequestMethod.POST)
 	public ModelAndView projetoAddPost(@RequestParam Map<String, String> allRequestParam,HttpServletRequest request) {
 		 HttpSession session = request.getSession(false);
@@ -88,6 +87,7 @@ public class ProjetoController {
 		
 		LocalDate dInicial = toLocalDate(inical);
 		LocalDate dFinal = toLocalDate(fina);
+		
 		Login login = (Login) session.getAttribute("login");
 		Projeto p = new Projeto(nome,dInicial,dFinal,descricao);
 		cadastrar(login, p);
