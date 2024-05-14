@@ -20,11 +20,11 @@
 					<label for="floatinInput" class="font-text">Nome do Projeto</label>
 				</div>
 				<div class="form-floating mb-3">
-					<input type="date" value="${projeto.dataInicial}" class="form-control input-height" placeholder="Data Inicial" id="floatingInput" name="dataInicial">
+					<input type="date" value="${projeto.dataInicial}" max="9999-01-01" class="form-control input-height" placeholder="Data Inicial" id="floatingInput" name="dataInicial">
 					<label for="floatinInput" class="font-text">Data Inicial</label>
 				</div>
 				<div class="form-floating mb-3">
-					<input type="date" value="${projeto.dataFinal}" class="form-control input-height" placeholder="Data Final" id="floatingInput" name="dataFinal">
+					<input type="date" value="${projeto.dataFinal}" max="9999-01-01" class="form-control input-height" placeholder="Data Final" id="floatingInput" name="dataFinal">
 					<label for="floatinInput" class="font-text">Data Final</label>
 				</div>
 				<div class="form-floating mb-3">

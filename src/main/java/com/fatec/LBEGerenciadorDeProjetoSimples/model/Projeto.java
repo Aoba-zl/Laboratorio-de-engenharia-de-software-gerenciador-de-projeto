@@ -44,7 +44,7 @@ public class Projeto {
 	@Column(name = "id", nullable = false)
 	private int id;
 	
-	@Column(name = "nome", nullable = false)
+	@Column(name = "nome",length = 40, nullable = false)
 	private String nome;
 	
 	@Column(name = "dataInicial", nullable = false)

@@ -1,22 +1,18 @@
 package com.fatec.LBEGerenciadorDeProjetoSimples.controller;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
-
 import com.fatec.LBEGerenciadorDeProjetoSimples.model.Equipe;
 import com.fatec.LBEGerenciadorDeProjetoSimples.model.Login;
 import com.fatec.LBEGerenciadorDeProjetoSimples.model.Projetista;
@@ -24,10 +20,8 @@ import com.fatec.LBEGerenciadorDeProjetoSimples.model.Projeto;
 import com.fatec.LBEGerenciadorDeProjetoSimples.repository.IEquipeRepository;
 import com.fatec.LBEGerenciadorDeProjetoSimples.repository.IProjetistaRepository;
 import com.fatec.LBEGerenciadorDeProjetoSimples.repository.IProjetoRepository;
-
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-import jakarta.websocket.server.PathParam;
 
 @Controller
 public class ProjetoController {
@@ -78,20 +72,27 @@ public class ProjetoController {
 	}
 	
 	@RequestMapping(name = "projeto-adicionar", value = "/projeto/adicionar-projeto", method = RequestMethod.POST)
-	public ModelAndView projetoAddPost(@RequestParam Map<String, String> allRequestParam,HttpServletRequest request) {
+	public ModelAndView projetoAddPost(@RequestParam Map<String, String> allRequestParam,ModelMap model,HttpServletRequest request) {
 		 HttpSession session = request.getSession(false);
 		String nome = allRequestParam.get("nomeProjeto").trim();
-		String inical = allRequestParam.get("dataInicial");
+		String inicial = allRequestParam.get("dataInicial");
 		String fina = allRequestParam.get("dataFinal");
 		String descricao = allRequestParam.get("descricao").trim();
-		
-		LocalDate dInicial = toLocalDate(inical);
-		LocalDate dFinal = toLocalDate(fina);
-		
-		Login login = (Login) session.getAttribute("login");
-		Projeto p = new Projeto(nome,dInicial,dFinal,descricao);
-		cadastrar(login, p);
-		return new ModelAndView("redirect:/projeto");
+		if (validar(nome,inicial,fina,descricao)){
+			LocalDate dInicial = toLocalDate(inicial);
+			LocalDate dFinal = toLocalDate(fina);
+			if (ChronoUnit.DAYS.between(dInicial,dFinal) < 0) {
+				Login login = (Login) session.getAttribute("login");
+				Projeto p = new Projeto(nome,dInicial,dFinal,descricao);
+				cadastrar(login, p);
+				return new ModelAndView("redirect:/projeto");
+			}
+		}
+		model.addAttribute("nome",nome);
+		model.addAttribute("inicial",inicial);
+		model.addAttribute("fina",fina);
+		model.addAttribute("descricao",descricao);
+		return new ModelAndView("projeto-adicionar");
 	}
 	
 	@RequestMapping(name = "projeto-atualizar", value = "/projeto/atualizar/{codigo}", method = RequestMethod.GET)
@@ -107,23 +108,27 @@ public class ProjetoController {
 	}
 	
 	@RequestMapping(name = "projeto-atualizar", value = "/projeto/atualizar/{codigo}", method = RequestMethod.POST)
-	public ModelAndView projetoAtualizarPost(@PathVariable("codigo") int codigo, @RequestParam Map<String, String> allRequestParam, ModelMap model) {
+	public ModelAndView projetoAtualizarPost(@PathVariable("codigo") int codigo, @RequestParam Map<String, String> allRequestParam, ModelMap model,HttpServletRequest request) {
 		String nome = allRequestParam.get("nomeProjeto").trim();
-		String inical = allRequestParam.get("dataInicial");
+		String inicial = allRequestParam.get("dataInicial");
 		String fina = allRequestParam.get("dataFinal");
 		String descricao = allRequestParam.get("descricao").trim();
-		LocalDate dInicial = toLocalDate(inical);
-		LocalDate dFinal = toLocalDate(fina);
 		Projeto projeto = new Projeto();
-		projeto.setId(codigo);
-		projeto = consultar(projeto);
-		projeto.setNome(nome);
-		projeto.setDataInicial(dInicial);
-		projeto.setDataFinal(dFinal);
-		projeto.setDescricao(descricao);
-
-		atualizar("a", projeto);
-		return new ModelAndView("redirect:/projeto");
+		if (validar(nome, inicial, fina, descricao)){
+			LocalDate dInicial = toLocalDate(inicial);
+			LocalDate dFinal = toLocalDate(fina);
+			if (ChronoUnit.DAYS.between(dInicial,dFinal) < 0) {
+			projeto.setId(codigo);
+			projeto = consultar(projeto);
+			projeto.setNome(nome);
+			projeto.setDataInicial(dInicial);
+			projeto.setDataFinal(dFinal);
+			projeto.setDescricao(descricao);
+			atualizar("a", projeto);
+			return new ModelAndView("redirect:/projeto");
+			}
+		}
+		return projetoAtualizarGet(codigo,allRequestParam,model,request);
 	}
 	
 	public String cadastrar(Login login, Projeto projeto) {
@@ -156,5 +161,12 @@ public class ProjetoController {
 		LocalDate localdate = LocalDate.parse(data);
 		return localdate;
 		
+	}
+	private boolean validar(String nome, String dInicial, String dFinal, String descricao) {
+		if(nome == "" || nome.length() > 40) {return false;}
+		if(dInicial == null) {return false;}
+		if(dFinal == null) {return false;}
+		if(descricao == "" || descricao.length() > 100) {return false;}
+		return true;
 	}
 }

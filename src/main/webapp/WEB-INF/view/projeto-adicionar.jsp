@@ -16,19 +16,19 @@
 			<form action="./adicionar-projeto" method="post">
 				<h1>Adicionar Novo Projeto</h1>
 				<div class="form-floating mb-3 mt-4">
-					<input type="text" class="form-control input-height" placeholder="Nome de Projeto" id="floatingInput" name="nomeProjeto">
+					<input type="text" value="${nome}" class="form-control input-height" placeholder="Nome de Projeto" id="floatingInput" name="nomeProjeto">
 					<label for="floatinInput" class="font-text">Nome do Projeto</label>
 				</div>
 				<div class="form-floating mb-3">
-					<input type="date" class="form-control input-height" placeholder="Data Inicial" id="floatingInput" name="dataInicial">
+					<input type="date" value="${inicial}" class="form-control input-height" placeholder="Data Inicial" id="floatingInput" name="dataInicial">
 					<label for="floatinInput" class="font-text">Data Inicial</label>
 				</div>
 				<div class="form-floating mb-3">
-					<input type="date" class="form-control input-height" placeholder="Data Final" id="floatingInput" name="dataFinal">
+					<input type="date" value="${fina}" class="form-control input-height" placeholder="Data Final" id="floatingInput" name="dataFinal">
 					<label for="floatinInput" class="font-text">Data Final</label>
 				</div>
 				<div class="form-floating mb-3">
-					<textarea class="form-control" style="min-height: 150px" placeholder="Descricao" id="floatingInput" name="descricao"></textarea>
+					<textarea class="form-control" style="min-height: 150px" placeholder="Descricao" id="floatingInput" name="descricao">${descricao}</textarea>
 					<label for="floatinInput" class="font-text">Descrição</label>
 				</div>
 				<div class="d-flex">
