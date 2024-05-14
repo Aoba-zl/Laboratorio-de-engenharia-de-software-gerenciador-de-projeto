@@ -14,7 +14,7 @@
 	<div class="overflow-hidden p-md-5 m-md-3 text-center">
 		<div class="col-md-4 p-lg-4 mx-auto my-5 border border-black rounded-5">
 			<form action="./${codigo}" method="post">
-				<h1>Adicionar Novo Projeto</h1>
+				<h1>Atualizar Projeto</h1>
 				<div class="form-floating mb-3 mt-4">
 					<input type="text" value="${projeto.nome}" class="form-control input-height" placeholder="Nome de Projeto" id="floatingInput" name="nomeProjeto">
 					<label for="floatinInput" class="font-text">Nome do Projeto</label>

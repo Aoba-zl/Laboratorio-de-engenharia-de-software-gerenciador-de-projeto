@@ -42,21 +42,26 @@ class LbeGerenciadorDeProjetoSimplesApplicationTests {
 //		Projetista pro = new Projetista("a","a");
 //		Login l = new Login("lulala","aranha",pro);
 //		pro.setLogin(l);
-//
+////
 //		Projeto p = new Projeto("lacração",LocalDate.now(), LocalDate.now(),"a");
 //		Atividade a = new Atividade(p,LocalDate.now(),LocalDate.now(),"a","nome");
-//		
+////		
 //		Equipe e = new Equipe(pro, p);
 //		
-//		pCon.cadastrar("c",p);
+//		pCon.cadastrar(l,p);
 //		projetistaCon.cadastrar(pro);
 //		atividadeRep.save(a);
 //		equipeRep.save(e);
 //		
 //		List<Projeto> projetos = pCon.listar();
-		Login login = new Login();
-		login = lrep.fn_login(null);
-		System.out.println(login);
+//		Login login = new Login();
+//		login = lrep.fn_login(null);
+//		System.out.println(login);
+		
+		Projetista pro = new Projetista();
+		pro.setId(2);
+		pro = projetistaCon.consultar(pro);
+		projetistaCon.deletar(pro);
 	}
 
 }

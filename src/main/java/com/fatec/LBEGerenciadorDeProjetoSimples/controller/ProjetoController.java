@@ -81,7 +81,7 @@ public class ProjetoController {
 		if (validar(nome,inicial,fina,descricao)){
 			LocalDate dInicial = toLocalDate(inicial);
 			LocalDate dFinal = toLocalDate(fina);
-			if (ChronoUnit.DAYS.between(dInicial,dFinal) < 0) {
+			if (ChronoUnit.DAYS.between(dInicial,dFinal) > 0) {
 				Login login = (Login) session.getAttribute("login");
 				Projeto p = new Projeto(nome,dInicial,dFinal,descricao);
 				cadastrar(login, p);
@@ -117,7 +117,7 @@ public class ProjetoController {
 		if (validar(nome, inicial, fina, descricao)){
 			LocalDate dInicial = toLocalDate(inicial);
 			LocalDate dFinal = toLocalDate(fina);
-			if (ChronoUnit.DAYS.between(dInicial,dFinal) < 0) {
+			if (ChronoUnit.DAYS.between(dInicial,dFinal) > 0) {
 			projeto.setId(codigo);
 			projeto = consultar(projeto);
 			projeto.setNome(nome);
