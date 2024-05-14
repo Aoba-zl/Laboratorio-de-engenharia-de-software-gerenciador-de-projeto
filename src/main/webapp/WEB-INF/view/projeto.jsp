@@ -42,10 +42,6 @@
 									</form>
 								</td>
 								<td>
-									<form action="./atualizar/${login.id}" method="get">
-										<button class="btn btn-success" value="${login.id}" name="botao" >Atualizarlogin</button>
-									</form>
-								</td>
 								<td style="max-width: 24px; min-width: 50px">
 									<button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal${p.id}"> Excluir </button>
 
