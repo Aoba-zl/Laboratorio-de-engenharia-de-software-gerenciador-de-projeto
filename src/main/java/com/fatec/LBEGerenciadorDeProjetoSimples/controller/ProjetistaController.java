@@ -77,18 +77,26 @@ public class ProjetistaController {
 		return new ModelAndView("atualizar");
 	}
 	
-	@RequestMapping(name = "atualizar", value = "/atualizar", method = RequestMethod.POST)
-	public ModelAndView projetistaAttPost(@RequestParam Map<String, String> allRequestParam) {
+	@RequestMapping(name = "atualizar", value = "/atualizar/{codigo}", method = RequestMethod.POST)
+	public ModelAndView projetistaAttPost(@PathVariable("codigo") int codigo,@RequestParam Map<String, String> allRequestParam) {
+		String cmd = allRequestParam.get("botao");
 		String usuario = allRequestParam.get("nomeUsuario").trim();
 		String senha = allRequestParam.get("senha").trim();
 		String email = allRequestParam.get("email").trim();
 		String nome = allRequestParam.get("nome").trim();
 		if(validarCadastro(usuario,senha,email,nome)) {
-			Projetista pro = new Projetista(email,nome);
-			Login l = new Login(usuario,senha,pro);
-			pro.setLogin(l);
-			cadastrar(pro);
+			Projetista projetista = new Projetista(email,nome);
+			Login l = new Login(usuario,senha,projetista);
+			projetista.setLogin(l);
+			if (cmd.contains("Atualizar")) {
+				atualizar(projetista);
+			}
+			if (cmd.contains("Excluir")) {
+				deletar(projetista);
+				return new ModelAndView("login");
+			}
 		}
+
 		return new ModelAndView("atualizar");
 	}
 	

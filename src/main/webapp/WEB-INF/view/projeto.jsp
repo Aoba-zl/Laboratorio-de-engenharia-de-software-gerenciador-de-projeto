@@ -31,6 +31,7 @@
 					<tr>
 						<c:if test="${not empty projetos}">
 							<c:forEach var="p" items="${projetos}" varStatus="loop">
+							
 								<th><c:out value="${p.nome}"/></th>
 								<td><c:out value="${p.dataInicial}"/></td>
 								<td><c:out value="${p.dataFinal}"/></td>
@@ -38,6 +39,11 @@
 								<td style="max-width: 24px; min-width: 50px">
 									<form action="./projeto/atualizar/${p.id}" method="get">
 										<button class="btn btn-success" value="${p.id} name="botao" >Atualizar</button>
+									</form>
+								</td>
+								<td>
+									<form action="./atualizar/${login.id}" method="get">
+										<button class="btn btn-success" value="${login.id}" name="botao" >Atualizarlogin</button>
 									</form>
 								</td>
 								<td style="max-width: 24px; min-width: 50px">
