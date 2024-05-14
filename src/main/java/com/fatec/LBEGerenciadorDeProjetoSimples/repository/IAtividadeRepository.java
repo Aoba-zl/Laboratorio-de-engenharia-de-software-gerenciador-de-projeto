@@ -3,7 +3,8 @@ package com.fatec.LBEGerenciadorDeProjetoSimples.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.fatec.LBEGerenciadorDeProjetoSimples.model.Atividade;
+import com.fatec.LBEGerenciadorDeProjetoSimples.model.AtividadeId;
 
-public interface IAtividadeRepository extends JpaRepository<Atividade, Integer>{
+public interface IAtividadeRepository extends JpaRepository<Atividade, AtividadeId>{
 
 }
