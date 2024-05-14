@@ -23,8 +23,8 @@ import com.fatec.LBEGerenciadorDeProjetoSimples.repository.IProjetistaRepository
 import jakarta.servlet.http.HttpServletRequest;
 @Controller
 public class ProjetistaController {
+	@Autowired
 	private LoginController lController;
-	
 	@Autowired
 	private IProjetistaRepository projetistaRep;
 	@Autowired

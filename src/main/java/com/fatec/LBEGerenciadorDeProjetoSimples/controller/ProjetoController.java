@@ -27,7 +27,6 @@ import jakarta.servlet.http.HttpSession;
 public class ProjetoController {
 	@Autowired
 	private LoginController lController;
-	
 	@Autowired
 	private IProjetoRepository projetoRep;
 	@Autowired
@@ -45,6 +44,7 @@ public class ProjetoController {
 		Login login = (Login) session.getAttribute("login");
 		List<Projeto> projetos = projetoRep.fn_projeto(login.getId());
 		model.addAttribute("projetos",projetos);
+		model.addAttribute("login",login);
 		return new ModelAndView("projeto");
 	}
 	
@@ -97,9 +97,9 @@ public class ProjetoController {
 	
 	@RequestMapping(name = "projeto-atualizar", value = "/projeto/atualizar/{codigo}", method = RequestMethod.GET)
 	public ModelAndView projetoAtualizarGet(@PathVariable("codigo") int codigo, @RequestParam Map<String, String> allRequestParam, ModelMap model,HttpServletRequest request) {
-		 if(!lController.verificarLogin(request)) {
+		if(!lController.verificarLogin(request)) {
 			 return new ModelAndView("redirect:/login");
-		 }
+		}
 		Projeto projeto = new Projeto();
 		projeto.setId(codigo);
 		projeto = consultar(projeto);
