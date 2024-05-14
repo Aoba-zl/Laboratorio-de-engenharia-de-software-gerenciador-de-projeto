@@ -1,5 +1,6 @@
 package com.fatec.LBEGerenciadorDeProjetoSimples.controller;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -78,16 +79,21 @@ public class ProjetistaController {
 	}
 	
 	@RequestMapping(name = "atualizar", value = "/atualizar/{codigo}", method = RequestMethod.POST)
-	public ModelAndView projetistaAttPost(@PathVariable("codigo") int codigo,@RequestParam Map<String, String> allRequestParam) {
+	public ModelAndView projetistaAttPost(@PathVariable("codigo") int codigo,@RequestParam Map<String, String> allRequestParam, ModelMap model,HttpServletRequest request) {
 		String cmd = allRequestParam.get("botao");
 		String usuario = allRequestParam.get("nomeUsuario").trim();
 		String senha = allRequestParam.get("senha").trim();
 		String email = allRequestParam.get("email").trim();
 		String nome = allRequestParam.get("nome").trim();
 		if(validarCadastro(usuario,senha,email,nome)) {
-			Projetista projetista = new Projetista(email,nome);
-			Login l = new Login(usuario,senha,projetista);
-			projetista.setLogin(l);
+			Projetista projetista = new Projetista();
+			projetista.setId(codigo);
+			projetista.setEmail(email);
+			projetista.setNome(nome);
+			Login login = new Login();
+			login.setSenha(senha);
+			login.setUsuario(usuario);
+			projetista.setLogin(login);
 			if (cmd.contains("Atualizar")) {
 				atualizar(projetista);
 			}
@@ -96,8 +102,7 @@ public class ProjetistaController {
 				return new ModelAndView("login");
 			}
 		}
-
-		return new ModelAndView("atualizar");
+		return projetoAtualizarGet(codigo, allRequestParam,model, request);
 	}
 	
 	
@@ -107,16 +112,17 @@ public class ProjetistaController {
 		return "Projetisca Cadastrado";
 	}
 	public String atualizar(Projetista projetista) {
-		projetistaRep.save(projetista);
+		projetistaRep.sp_upt_projetista(projetista.getId(), projetista.getEmail(), projetista.getNome(), projetista.getLogin().getUsuario(), projetista.getLogin().getSenha());
 		return "Projetisca Atualizado";
 	}
 	public String deletar(Projetista projetista) {
-		projetistaRep.delete(projetista);
+		projetistaRep.sp_del_projetista(projetista.getId());
 		return "Projetista Excluido";
 		
-	}
+	}	
 	public Projetista consultar(Projetista projetista) {
-		return projetistaRep.findById(projetista.getId()).get();
+		Optional<Projetista> projetistas = projetistaRep.findById(projetista.getId());
+		return projetistas.get();
 	}
 	private boolean validarCadastro(String usuario,String senha,String email,String nome) {
 		if(usuario == "" || usuario.length() > 80) {return false;}

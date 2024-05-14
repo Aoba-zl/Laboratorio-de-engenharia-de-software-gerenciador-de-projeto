@@ -36,9 +36,11 @@ public class LoginController {
 		String senha = allRequestParam.get("senha").trim();
 		if (validar(usuario, senha)) {
 			Login login = loginRep.fn_login(usuario);
-			HttpSession session = request.getSession();
-			session.setAttribute("login", login);
-			return new ModelAndView("redirect:/projeto");
+			if (login == null) {
+				HttpSession session = request.getSession();
+				session.setAttribute("login", login);
+				return new ModelAndView("redirect:/projeto");
+			}
 		}
 		return new ModelAndView("login");
 	}
