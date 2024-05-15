@@ -24,18 +24,6 @@ public class ProjetistaController {
 	@Autowired
 	private IProjetistaRepository projetistaRep;
 	
-	@RequestMapping(name = "projetista", value = "/projetista", method = RequestMethod.GET)
-	public ModelAndView projetoGet(ModelMap model) {
-		
-		return new ModelAndView("projetista");
-	}
-	
-	@RequestMapping(name = "projetista", value = "/projetista", method = RequestMethod.POST)
-	public ModelAndView projetoPost(@RequestParam Map<String, String> allRequestParam) {
-		
-		return new ModelAndView("projetista");
-	}
-	
 	@RequestMapping(name = "cadastro", value = "/cadastro", method = RequestMethod.GET)
 	public ModelAndView projetistaAddGet(ModelMap model) {
 		
