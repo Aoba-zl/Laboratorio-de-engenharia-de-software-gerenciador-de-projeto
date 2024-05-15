@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <title>Atividade</title>
 </head>
 <body>
@@ -29,7 +29,7 @@
 								</thead>
 								<tbody>
 									<c:if test="${not empty atividades}">
-										<c:forEach var="a" items="${atividades}"> <!-- items -->
+										<c:forEach var="a" items="${atividades}">
 											<tr>
 												<th><a href="/LBEGerenciadorDeProjetoSimples/projeto/${codigoProjeto}/atividade/${a.id}">${a.nome}</a></th>
 												<td style="max-width: 24px; min-width: 50px">

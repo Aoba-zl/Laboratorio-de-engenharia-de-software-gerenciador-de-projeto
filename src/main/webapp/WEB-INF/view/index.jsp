@@ -5,7 +5,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-
 <title>Gerenciador de Projeto Simples</title>
 </head>
 <body>

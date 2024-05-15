@@ -5,8 +5,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-
-
 <title>Cadastro</title>
 </head>
 <body>

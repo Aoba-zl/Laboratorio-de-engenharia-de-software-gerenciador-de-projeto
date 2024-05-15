@@ -20,10 +20,6 @@ import com.fatec.LBEGerenciadorDeProjetoSimples.model.Projeto;
 import com.fatec.LBEGerenciadorDeProjetoSimples.repository.IAtividadeRepository;
 import com.fatec.LBEGerenciadorDeProjetoSimples.repository.IProjetoRepository;
 
-
-import jakarta.transaction.Transactional;
-import jakarta.persistence.Transient;
-
 @Controller
 public class AtividadeController {
 	@Autowired

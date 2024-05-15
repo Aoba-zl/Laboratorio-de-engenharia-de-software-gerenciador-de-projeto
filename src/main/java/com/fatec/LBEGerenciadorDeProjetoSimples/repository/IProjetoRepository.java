@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.data.repository.query.Param;
 
-import com.fatec.LBEGerenciadorDeProjetoSimples.model.Login;
 import com.fatec.LBEGerenciadorDeProjetoSimples.model.Projeto;
 
 public interface IProjetoRepository extends JpaRepository<Projeto, Integer>{

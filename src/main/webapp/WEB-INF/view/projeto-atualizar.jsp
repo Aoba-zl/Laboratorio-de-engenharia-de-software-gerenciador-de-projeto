@@ -1,11 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"  %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-
-<title>Projeto</title>
+<meta charset="UTF-8">
+<title>Atualizar Projeto</title>
 </head>
 <body>
 	<div>
@@ -29,7 +29,7 @@
 				</div>
 				<div class="form-floating mb-3">
 					<textarea class="form-control" style="min-height: 150px; resize: none;" placeholder="Descricao" id="floatingInput" name="descricao">${projeto.descricao}</textarea>
-					<label for="floatinInput" class="font-text">Descrição</label>
+					<label for="floatinInput" class="font-text">DescriÃ§Ã£o</label>
 				</div>
 				<div class="d-flex">
 					<button class="btn btn-secondary ms-auto mt-2">Confirmar Novo Projeto</button>

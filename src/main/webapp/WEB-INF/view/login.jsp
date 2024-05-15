@@ -5,8 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-
-<title>Gerenciador de Projeto Simples</title>
+<title>Login</title>
 </head>
 <body>
 	<div>

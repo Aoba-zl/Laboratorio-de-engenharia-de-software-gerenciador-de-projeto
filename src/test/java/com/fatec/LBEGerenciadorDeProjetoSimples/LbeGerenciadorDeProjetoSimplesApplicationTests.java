@@ -31,9 +31,30 @@ import com.fatec.LBEGerenciadorDeProjetoSimples.repository.ILoginRepository;
 class LbeGerenciadorDeProjetoSimplesApplicationTests {
 	
 	@Autowired
+	private ProjetoController pCon;
+	
+	@Autowired
+	private AtividadeController aCon;
+	
+	@Autowired 
+	private ProjetistaController projetistaCon;
+	
+	@Autowired
+	private IEquipeRepository equipeRep;
+
+	@Autowired
+	private IProjetoRepository projetoRep;
+	
+	@Autowired
+	private IAtividadeRepository atividadeRep;
+	
+	@Autowired
+	private ILoginRepository lrep;
+	
+	
 	@Test
 	@Transactional
-	void contextLoads() 
+	void req_test_matheus() 
 	{
 		Projeto p1 = new Projeto("Projeto 1", LocalDate.of(2000, 02, 02), LocalDate.of(2000, 03, 02), "test1");
 		Projeto p2 = new Projeto("Projeto 2", LocalDate.of(2000, 02, 02), LocalDate.of(2000, 03, 02), "test2");
@@ -75,22 +96,8 @@ class LbeGerenciadorDeProjetoSimplesApplicationTests {
 		System.out.println(i);
 	}
 		
-	private ProjetoController pCon;
-	
-	@Autowired 
-	private ProjetistaController projetistaCon;
-	
-	@Autowired
-	private IEquipeRepository equipeRep;
-	
-	@Autowired
-	private IAtividadeRepository atividadeRep;
-	
-	@Autowired
-	private ILoginRepository lrep;
-	
 	@Test
-	void contextLoads() {
+	void req_test_david() {
 		
 //		Projetista pro = new Projetista("a","a");
 //		Login l = new Login("lulala","aranha",pro);
