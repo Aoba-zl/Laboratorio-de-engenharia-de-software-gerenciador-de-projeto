@@ -25,9 +25,14 @@
 						</c:forEach>
 					</select>
 				</div>
-				<div class="d-flex">
+				<div class="d-flex justify-content-between">
+				<div>
+					<a class="btn btn-secondary ms-auto mt-2" href="/LBEGerenciadorDeProjetoSimples/projeto/${codigoProjeto}/atividade/equipe">Voltar</a>
+				</div>
+				<div>
 					<button class="btn btn-secondary ms-auto mt-2">Adicionar Membro</button>
 				</div>
+			</div>
 			</form>
 		</div>
 	</div>

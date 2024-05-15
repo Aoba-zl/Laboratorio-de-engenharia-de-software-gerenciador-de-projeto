@@ -54,8 +54,13 @@
 					</tbody>
 				</table>
 			</div>
-			<div class="d-flex">
-				<a class="btn btn-secondary ms-auto mt-2" href="./equipe/adicionar-membro">Adicionar Membro</a>
+			<div class="d-flex justify-content-between">
+				<div>
+					<a class="btn btn-secondary ms-auto mt-2" href="/LBEGerenciadorDeProjetoSimples/projeto/${codigoProjeto}/atividade">Voltar</a>
+				</div>
+				<div>
+					<a class="btn btn-secondary ms-auto mt-2" href="./equipe/adicionar-membro">Adicionar Membro</a>
+				</div>
 			</div>
 		</div>
 	</div>
