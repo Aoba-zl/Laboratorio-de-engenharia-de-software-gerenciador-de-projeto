@@ -1,10 +1,8 @@
 package com.fatec.LBEGerenciadorDeProjetoSimples.controller;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import org.hibernate.Length;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -16,9 +14,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.fatec.LBEGerenciadorDeProjetoSimples.model.Login;
 import com.fatec.LBEGerenciadorDeProjetoSimples.model.Projetista;
-import com.fatec.LBEGerenciadorDeProjetoSimples.model.Projeto;
-import com.fatec.LBEGerenciadorDeProjetoSimples.repository.IEquipeRepository;
-import com.fatec.LBEGerenciadorDeProjetoSimples.repository.ILoginRepository;
 import com.fatec.LBEGerenciadorDeProjetoSimples.repository.IProjetistaRepository;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -28,10 +23,6 @@ public class ProjetistaController {
 	private LoginController lController;
 	@Autowired
 	private IProjetistaRepository projetistaRep;
-	@Autowired
-	private IEquipeRepository equipeRep;
-	@Autowired
-	private ILoginRepository loginRep;
 	
 	@RequestMapping(name = "projetista", value = "/projetista", method = RequestMethod.GET)
 	public ModelAndView projetoGet(ModelMap model) {
@@ -107,17 +98,14 @@ public class ProjetistaController {
 	
 	
 	
-	public String cadastrar(Projetista projetista) {
+	public void cadastrar(Projetista projetista) {
 		projetistaRep.save(projetista);
-		return "Projetisca Cadastrado";
 	}
-	public String atualizar(Projetista projetista) {
+	public void atualizar(Projetista projetista) {
 		projetistaRep.sp_upt_projetista(projetista.getId(), projetista.getEmail(), projetista.getNome(), projetista.getLogin().getUsuario(), projetista.getLogin().getSenha());
-		return "Projetisca Atualizado";
 	}
-	public String deletar(Projetista projetista) {
+	public void deletar(Projetista projetista) {
 		projetistaRep.sp_del_projetista(projetista.getId());
-		return "Projetista Excluido";
 		
 	}	
 	public Projetista consultar(Projetista projetista) {
