@@ -56,7 +56,7 @@ public class ProjetoController {
 			Projeto projeto = new Projeto();
 			projeto.setId(id);
 			projeto = consultar(projeto);
-			deletar("D",projeto);
+			deletar(projeto);
 		}
 		List<Projeto> projetos = listar();
 		model.addAttribute("projetos",projetos);
@@ -124,28 +124,25 @@ public class ProjetoController {
 			projeto.setDataInicial(dInicial);
 			projeto.setDataFinal(dFinal);
 			projeto.setDescricao(descricao);
-			atualizar("a", projeto);
+			atualizar(projeto);
 			return new ModelAndView("redirect:/projeto");
 			}
 		}
 		return projetoAtualizarGet(codigo,allRequestParam,model,request);
 	}
 	
-	public String cadastrar(Login login, Projeto projeto) {
+	public void cadastrar(Login login, Projeto projeto) {
 		projetoRep.save(projeto);
 		Optional<Projetista> o = projetistaRep.findById(login.getId());
 		Equipe equipe = new Equipe(o.get(),projeto);
 		equipeRep.save(equipe);
-		return "Projeto Cadastrado";
 	}
-	public String atualizar(String acao, Projeto projeto) {
+	public void atualizar(Projeto projeto) {
 		projetoRep.save(projeto);
-		return "Projeto Atualizado";
 		
 	}
-	public String deletar(String acao, Projeto projeto) {
+	public void deletar(Projeto projeto) {
 		projetoRep.sp_del_projeto(projeto.getId());
-		return "Projeto Excluido";
 		
 	}
 	public Projeto consultar(Projeto projeto) {
