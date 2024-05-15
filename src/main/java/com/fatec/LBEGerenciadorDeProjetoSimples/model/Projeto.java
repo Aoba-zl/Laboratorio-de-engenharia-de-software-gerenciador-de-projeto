@@ -28,12 +28,12 @@ import lombok.ToString;
 @Entity
 @Table(name = "projeto")
 @NamedStoredProcedureQuery(
-		name = "Projeto.sp_del_projeto",
-		procedureName = "sp_del_projeto",
-		parameters = {
-				@StoredProcedureParameter(mode = ParameterMode.IN,
-					name = "id", type = Integer.class),
-		}
+        name = "Projeto.sp_del_projeto",
+        procedureName = "sp_del_projeto",
+        parameters = {
+                @StoredProcedureParameter(mode = ParameterMode.IN, name = "id", type = Integer.class),
+                @StoredProcedureParameter(mode = ParameterMode.IN, name = "id_projetista", type = Integer.class),
+        }
 )
 @NamedNativeQuery(
 		name = "Projeto_fn_projeto",

@@ -78,7 +78,7 @@ public class ProjetistaController {
 			}
 			if (cmd.contains("Excluir")) {
 				deletar(projetista);
-				return new ModelAndView("login");
+				return new ModelAndView("redirect:/login");
 			}
 		}
 		return projetoAtualizarGet(codigo, allRequestParam,model, request);
@@ -86,17 +86,17 @@ public class ProjetistaController {
 	
 	
 	
-	public void cadastrar(Projetista projetista) {
+	private void cadastrar(Projetista projetista) {
 		projetistaRep.save(projetista);
 	}
-	public void atualizar(Projetista projetista) {
+	private void atualizar(Projetista projetista) {
 		projetistaRep.sp_upt_projetista(projetista.getId(), projetista.getEmail(), projetista.getNome(), projetista.getLogin().getUsuario(), projetista.getLogin().getSenha());
 	}
-	public void deletar(Projetista projetista) {
+	private void deletar(Projetista projetista) {
 		projetistaRep.sp_del_projetista(projetista.getId());
 		
 	}	
-	public Projetista consultar(Projetista projetista) {
+	private Projetista consultar(Projetista projetista) {
 		Optional<Projetista> projetistas = projetistaRep.findById(projetista.getId());
 		return projetistas.get();
 	}

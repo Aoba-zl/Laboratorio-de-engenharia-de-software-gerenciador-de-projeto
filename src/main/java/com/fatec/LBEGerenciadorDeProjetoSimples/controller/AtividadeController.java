@@ -20,6 +20,8 @@ import com.fatec.LBEGerenciadorDeProjetoSimples.model.Projeto;
 import com.fatec.LBEGerenciadorDeProjetoSimples.repository.IAtividadeRepository;
 import com.fatec.LBEGerenciadorDeProjetoSimples.repository.IProjetoRepository;
 
+import jakarta.servlet.http.HttpServletRequest;
+
 @Controller
 public class AtividadeController {
 	@Autowired
@@ -32,7 +34,11 @@ public class AtividadeController {
 	private IAtividadeRepository atividadeRep;
 	
 	@RequestMapping(name = "atividade", value = "/projeto/{codigoProjeto}/atividade", method = RequestMethod.GET)
-	public ModelAndView atividadeGet(@PathVariable("codigoProjeto") int codigoProjeto, ModelMap model) {
+	public ModelAndView atividadeGet(@PathVariable("codigoProjeto") int codigoProjeto, HttpServletRequest request, ModelMap model) {
+		
+		if(!lController.verificarLogin(request)) {
+			 return new ModelAndView("redirect:/login");
+		}
 		
 		List<Atividade> atividadesDeProjeto = listar();
 		List<Atividade> atividades = new ArrayList<>();
@@ -53,7 +59,11 @@ public class AtividadeController {
 	}
 	
 	@RequestMapping(name = "atividade", value = "/projeto/{codigoProjeto}/atividade/{codigoAtividade}", method = RequestMethod.GET)
-	public ModelAndView umAtividadeGet(@PathVariable("codigoProjeto") int codigoProjeto, @PathVariable("codigoAtividade") int codigoAtividade, ModelMap model) {
+	public ModelAndView umAtividadeGet(@PathVariable("codigoProjeto") int codigoProjeto, @PathVariable("codigoAtividade") int codigoAtividade, HttpServletRequest request, ModelMap model) {
+		
+		if(!lController.verificarLogin(request)) {
+			 return new ModelAndView("redirect:/login");
+		}
 		
 		Atividade a = new Atividade();
 		Projeto p = consultarProjeto(codigoProjeto);
@@ -78,7 +88,11 @@ public class AtividadeController {
 	}
 	
 	@RequestMapping(name = "atividade-atualizar", value = "/projeto/{codigoProjeto}/atividade/{codigoAtividade}/atualizar", method = RequestMethod.GET)
-	public ModelAndView atividadeAtualizarGet(@PathVariable("codigoProjeto") int codigoProjeto, @PathVariable("codigoAtividade") int codigoAtividade, @RequestParam Map<String, String> allRequestParam, ModelMap model) {
+	public ModelAndView atividadeAtualizarGet(@PathVariable("codigoProjeto") int codigoProjeto, @PathVariable("codigoAtividade") int codigoAtividade, @RequestParam Map<String, String> allRequestParam, HttpServletRequest request, ModelMap model) {
+		
+		if(!lController.verificarLogin(request)) {
+			 return new ModelAndView("redirect:/login");
+		}
 		
 		Projeto p = consultarProjeto(codigoProjeto);
 		AtividadeId aId = new AtividadeId(codigoAtividade, p);
@@ -113,7 +127,10 @@ public class AtividadeController {
 	}
 	
 	@RequestMapping(name = "atividade-adicionar", value = "/projeto/{codigoProjeto}/atividade/adicionar-atividade", method = RequestMethod.GET)
-	public ModelAndView atividadeAdicionarGet(@PathVariable("codigoProjeto") int codigoProjeto, ModelMap model) {
+	public ModelAndView atividadeAdicionarGet(@PathVariable("codigoProjeto") int codigoProjeto, HttpServletRequest request, ModelMap model) {
+		if(!lController.verificarLogin(request)) {
+			 return new ModelAndView("redirect:/login");
+		}
 		
 		return new ModelAndView("atividade-adicionar");
 	}
@@ -129,7 +146,7 @@ public class AtividadeController {
 		Projeto p = consultarProjeto(codigoProjeto);
 		
 		Atividade a = new Atividade();
-		a.setId(conutId(codigoProjeto));
+		a.setId(countId(codigoProjeto));
 		a.setNome(nome);
 		a.setDataInicial(LocalDate.parse(dataInicial));
 		a.setDataFinal(LocalDate.parse(dataFinal));
@@ -175,12 +192,8 @@ public class AtividadeController {
 		return projetoRep.findById(codigoProjeto).get();
 	}
 	
-	private int conutId(int idProjeto)
+	private int countId(int codigoProjeto)
 	{
-		return atividadeRep.fn_count_id_atividade(idProjeto);
-	}
-	
-	public void opAtividade() {
-
+		return atividadeRep.fn_count_id_atividade(codigoProjeto);
 	}
 }

@@ -49,14 +49,16 @@ public class ProjetoController {
 	}
 	
 	@RequestMapping(name = "projeto", value = "/projeto", method = RequestMethod.POST)
-	public ModelAndView projetoPost(@RequestParam Map<String, String> allRequestParam, ModelMap model) {
+	public ModelAndView projetoPost(@RequestParam Map<String, String> allRequestParam, HttpServletRequest request, ModelMap model) {
 		String cmd = allRequestParam.get("botao");
 		int id = Integer.parseInt(allRequestParam.get("botaoId"));
 		if (cmd.contains("Excluir")) {
+			HttpSession session = request.getSession(false);
+            Login login = (Login) session.getAttribute("login");
 			Projeto projeto = new Projeto();
 			projeto.setId(id);
 			projeto = consultar(projeto);
-			deletar(projeto);
+			deletar(projeto, login);
 		}
 		List<Projeto> projetos = listar();
 		model.addAttribute("projetos",projetos);
@@ -131,26 +133,29 @@ public class ProjetoController {
 		return projetoAtualizarGet(codigo,allRequestParam,model,request);
 	}
 	
-	public void cadastrar(Login login, Projeto projeto) {
+	private void cadastrar(Login login, Projeto projeto) {
 		projetoRep.save(projeto);
 		Optional<Projetista> o = projetistaRep.findById(login.getId());
 		Equipe equipe = new Equipe(o.get(),projeto);
 		equipeRep.save(equipe);
 	}
-	public void atualizar(Projeto projeto) {
+	
+	private void atualizar(Projeto projeto) {
 		projetoRep.save(projeto);
 		
 	}
-	public void deletar(Projeto projeto) {
-		projetoRep.sp_del_projeto(projeto.getId());
+	
+	private void deletar(Projeto projeto, Login login) {
+		projetoRep.sp_del_projeto(projeto.getId(), login.getId());
 		
 	}
-	public Projeto consultar(Projeto projeto) {
+	
+	private Projeto consultar(Projeto projeto) {
 		Optional<Projeto> p = projetoRep.findById(projeto.getId());
 		return p.get();
-		
 	}
-	public List<Projeto> listar() {
+	
+	private List<Projeto> listar() {
 		return projetoRep.findAll();
 	}
 	
