@@ -28,7 +28,7 @@
 				</thead>
 				<tbody>
 					<tr>
-						<th>Nome do projeto</th>
+						<th><a href="./projeto/1/atividade">Nome do projeto</a></th>
 						<td>Data inicial</td>
 						<td>Data final</td>
 						<td>Descricao</td>
@@ -50,7 +50,7 @@
 										</div>
 										<div class="modal-footer">
 											<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
-											<form action="./projeto/excluir/" method="post">
+											<form action="./projeto/excluir/1" method="post">
 												<button class="btn btn-danger">Excluir</button>
 											</form>
 										</div>
