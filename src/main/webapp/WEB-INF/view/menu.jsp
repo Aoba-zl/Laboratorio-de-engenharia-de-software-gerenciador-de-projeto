@@ -31,8 +31,16 @@
 				<a class="a-color py-2 d-none d-md-inline-block" href="/LBEGerenciadorDeProjetoSimples/sobre-nos">Sobre Nós</a>
 			</div>
 			<div>
-				<a class="a-color py-2 d-none d-md-inline-block" href="/LBEGerenciadorDeProjetoSimples/login">Login</a>
-				<a class="a-color py-2 d-none d-md-inline-block" href="/LBEGerenciadorDeProjetoSimples/cadastro" style="margin-right: 6rem">Cadastro</a>
+			<c:choose>
+	            <c:when test="${empty sessionScope.login}">
+					<a class="a-color py-2 d-none d-md-inline-block" href="/LBEGerenciadorDeProjetoSimples/login">Login</a>
+					<a class="a-color py-2 d-none d-md-inline-block" href="/LBEGerenciadorDeProjetoSimples/cadastro" style="margin-right: 6rem">Cadastro</a>
+	            </c:when>
+	            <c:otherwise>
+					<a class="a-color py-2 d-none d-md-inline-block" href="/LBEGerenciadorDeProjetoSimples/login">Sair</a>
+					<a class="a-color py-2 d-none d-md-inline-block" href="/LBEGerenciadorDeProjetoSimples/atualizar/${sessionScope.login.id}" style="margin-right: 6rem">Usuario</a>
+		        </c:otherwise>
+       		</c:choose>
 			</div>
 		</div>
 	</nav>

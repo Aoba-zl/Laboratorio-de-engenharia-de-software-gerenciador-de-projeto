@@ -8,7 +8,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,9 +20,13 @@ import com.fatec.LBEGerenciadorDeProjetoSimples.model.Projeto;
 import com.fatec.LBEGerenciadorDeProjetoSimples.repository.IAtividadeRepository;
 import com.fatec.LBEGerenciadorDeProjetoSimples.repository.IProjetoRepository;
 
+
 import jakarta.transaction.Transactional;
+import jakarta.persistence.Transient;
+
 @Controller
 public class AtividadeController {
+	@Autowired
 	private LoginController lController;
 	
 	@Autowired
@@ -31,52 +34,6 @@ public class AtividadeController {
 	
 	@Autowired
 	private IAtividadeRepository atividadeRep;
-	
-	@Transactional
-	public void testAtividade()
-	{
-		Projeto p1 = new Projeto("Projeto 1", LocalDate.of(2000, 02, 02), LocalDate.of(2000, 03, 02), "test1");
-		Projeto p2 = new Projeto("Projeto 2", LocalDate.of(2000, 02, 02), LocalDate.of(2000, 03, 02), "test2");
-		Projeto p3 = new Projeto("Projeto 3", LocalDate.of(2000, 02, 02), LocalDate.of(2000, 03, 02), "test3");
-		
-		System.out.println(p1);
-		System.out.println(p2);
-		System.out.println(p3);
-		
-		projetoRep.save(p1);
-		projetoRep.save(p2);
-		projetoRep.save(p3);
-		
-		Atividade a1 = new Atividade(1, "test 1", "test1", LocalDate.of(2000, 02, 02), LocalDate.of(2000, 03, 02), p1);
-		Atividade a2 = new Atividade(2, "test 2", "test2", LocalDate.of(2000, 02, 02), LocalDate.of(2000, 03, 02), p2);
-		Atividade a3 = new Atividade(3, "test 3", "test3", LocalDate.of(2000, 02, 02), LocalDate.of(2000, 03, 02), p3);
-		Atividade a4 = new Atividade(1, "test 4", "test4", LocalDate.of(2000, 02, 02), LocalDate.of(2000, 03, 02), p3);
-		
-		System.out.println(a1);
-		System.out.println(a2);
-		System.out.println(a3);
-		System.out.println(a4);
-		
-		atividadeRep.save(a1);
-		atividadeRep.save(a2);
-		atividadeRep.save(a3);
-		atividadeRep.save(a4);
-		
-		List<Atividade> atividades = listar();
-		
-		atividades.forEach(a -> System.out.println(a));
-		
-		AtividadeId aId = new AtividadeId(a1.getId(), p1);
-		Atividade at = atividadeRep.findById(aId).get();
-		
-		System.out.println(at);
-		
-		int i = atividadeRep.fn_count_id_atividade(3);
-		System.out.println(i);
-		
-		
-		
-	}
 	
 	@RequestMapping(name = "atividade", value = "/projeto/{codigoProjeto}/atividade", method = RequestMethod.GET)
 	public ModelAndView atividadeGet(@PathVariable("codigoProjeto") int codigoProjeto, ModelMap model) {
@@ -98,8 +55,6 @@ public class AtividadeController {
 		
 		return new ModelAndView("atividade");
 	}
-	
-	@DeleteMapping
 	
 	@RequestMapping(name = "atividade", value = "/projeto/{codigoProjeto}/atividade/{codigoAtividade}", method = RequestMethod.GET)
 	public ModelAndView umAtividadeGet(@PathVariable("codigoProjeto") int codigoProjeto, @PathVariable("codigoAtividade") int codigoAtividade, ModelMap model) {
@@ -225,7 +180,11 @@ public class AtividadeController {
 	
 	private int conutId(int idProjeto)
 	{
+
 		
 		return atividadeRep.fn_count_id_atividade(idProjeto);
+	}
+	public void opAtividade() {
+
 	}
 }

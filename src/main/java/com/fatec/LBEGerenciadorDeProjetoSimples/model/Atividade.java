@@ -63,6 +63,4 @@ public class Atividade {
 		this.dataFinal = dataFinal;
 		this.projeto = projeto;
 	}
-	
-	
 }

@@ -8,11 +8,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Setter
 @Getter
-@AllArgsConstructor
-@NoArgsConstructor
+@Setter
 @ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class AtividadeId implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private int id;
