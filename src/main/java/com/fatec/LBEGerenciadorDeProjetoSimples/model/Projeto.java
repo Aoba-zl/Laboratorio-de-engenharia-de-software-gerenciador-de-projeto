@@ -1,8 +1,12 @@
 package com.fatec.LBEGerenciadorDeProjetoSimples.model;
 
 import java.time.LocalDate;
-import jakarta.persistence.StoredProcedureParameter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.StoredProcedureParameter;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -78,5 +82,4 @@ public class Projeto {
 		this.dataFinal = dataFinal;
 		this.descricao = descricao;
 	}
-	
 }

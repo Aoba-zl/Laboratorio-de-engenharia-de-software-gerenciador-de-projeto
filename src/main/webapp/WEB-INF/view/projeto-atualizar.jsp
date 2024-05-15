@@ -28,8 +28,8 @@
 					<label for="floatinInput" class="font-text">Data Final</label>
 				</div>
 				<div class="form-floating mb-3">
-					<textarea class="form-control" style="min-height: 150px" placeholder="Descricao" id="floatingInput" name="descricao">${projeto.descricao}</textarea>
-					<label for="floatinInput" class="font-text">Descrição</label>
+					<textarea class="form-control" style="min-height: 150px; resize: none;" placeholder="Descricao" id="floatingInput" name="descricao">${projeto.descricao}</textarea>
+					<label for="floatinInput" class="font-text">DescriÃ§Ã£o</label>
 				</div>
 				<div class="d-flex">
 					<button class="btn btn-secondary ms-auto mt-2">Confirmar Novo Projeto</button>

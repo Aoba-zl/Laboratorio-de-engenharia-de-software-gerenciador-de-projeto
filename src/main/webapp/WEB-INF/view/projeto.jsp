@@ -53,7 +53,7 @@
 													<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 												</div>
 												<div class="modal-footer">
-													<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
+													<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">NÃ£o</button>
 													<form action="projeto" method="post">
 														<button name="botao" value="Excluir" class="btn btn-danger" >Excluir</button>
 														<input type="hidden" name="botaoId" value="${p.id}">

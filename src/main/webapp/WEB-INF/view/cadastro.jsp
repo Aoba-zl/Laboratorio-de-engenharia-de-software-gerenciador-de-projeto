@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 
 
-<title>Gerenciador de Projeto Simples</title>
+<title>Cadastro</title>
 </head>
 <body>
 	<div>
