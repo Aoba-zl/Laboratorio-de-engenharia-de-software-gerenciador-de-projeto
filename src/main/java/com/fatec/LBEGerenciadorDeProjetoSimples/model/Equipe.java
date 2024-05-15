@@ -8,6 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.IdClass;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.NamedNativeQuery;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,12 +27,12 @@ import lombok.ToString;
 public class Equipe {
 	
 	@Id
-	@ManyToOne(cascade = CascadeType.ALL, targetEntity = Projetista.class, fetch = FetchType.LAZY)
+	@ManyToOne(targetEntity = Projetista.class, fetch = FetchType.LAZY)
 	@JoinColumn(name = "projetistaId", nullable = false)
 	private Projetista projetista;
 	
 	@Id
-	@ManyToOne(cascade = CascadeType.ALL, targetEntity = Projeto.class, fetch = FetchType.LAZY)
+	@ManyToOne(targetEntity = Projeto.class, fetch = FetchType.LAZY)
 	@JoinColumn(name = "projetoId", nullable = false)
 	private Projeto projeto;
 }

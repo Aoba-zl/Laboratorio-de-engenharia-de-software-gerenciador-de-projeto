@@ -17,8 +17,13 @@
 				<div class="container border rounded-3">
 					<h3>${projeto.nome}</h3>
 					<div class="container border rounded-3">
-						<div class="d-flex justify-content-end p-2" style="padding-right: 0rem !important;">
-							<a class="btn btn-success" href="./atividade/adicionar-atividade">Adicionar Atividade</a>
+						<div class="d-flex justify-content-between p-2" style="padding-right: 0rem !important; padding-left: 0rem !important;">
+							<div>
+								<a class="btn btn-secondary" href="/LBEGerenciadorDeProjetoSimples/projeto/${codigoProjeto}/atividade/equipe" style="min-width: 163.91px;">Membro da Equipe</a>
+							</div>
+							<div>
+								<a class="btn btn-success" href="/LBEGerenciadorDeProjetoSimples/projeto/${codigoProjeto}/atividade/adicionar-atividade">Adicionar Atividade</a>
+							</div>
 						</div>
 						<div class="border rounded-3 scroll" style="min-height: 510px; max-height: 510px">
 							<table class="table table-striped">

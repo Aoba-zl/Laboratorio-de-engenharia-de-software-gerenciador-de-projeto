@@ -83,9 +83,9 @@ class LbeGerenciadorDeProjetoSimplesApplicationTests {
 		atividadeRep.save(a3);
 		atividadeRep.save(a4);
 		
-		List<Atividade> atividades = aCon.listar();
+//		List<Atividade> atividades = aCon.listar();
 		
-		atividades.forEach(a -> System.out.println(a));
+//		atividades.forEach(a -> System.out.println(a));
 		
 		AtividadeId aId = new AtividadeId(a1.getId(), p1);
 		Atividade at = atividadeRep.findById(aId).get();

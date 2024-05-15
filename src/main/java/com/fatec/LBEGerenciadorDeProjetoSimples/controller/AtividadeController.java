@@ -90,7 +90,7 @@ public class AtividadeController {
 	}
 	
 	@RequestMapping(name = "atividade-atualizar", value = "/projeto/{codigoProjeto}/atividade/{codigoAtividade}/atualizar", method = RequestMethod.POST)
-	public ModelAndView atividadeAtualizarPost(@PathVariable("codigoProjeto") int codigoProjeto, @RequestParam Map<String, String> allRequestParam, ModelMap model) {
+	public ModelAndView atividadeAtualizarPost(@PathVariable("codigoProjeto") int codigoProjeto, @PathVariable("codigoAtividade") int codigoAtividade, @RequestParam Map<String, String> allRequestParam, ModelMap model) {
 		
 		String nome = allRequestParam.get("nome");
 		String dataInicial = allRequestParam.get("dataInicial");
@@ -100,6 +100,7 @@ public class AtividadeController {
 		Projeto p = consultarProjeto(codigoProjeto);
 		
 		Atividade a = new Atividade();
+		a.setId(codigoAtividade);
 		a.setNome(nome);
 		a.setDataInicial(LocalDate.parse(dataInicial));
 		a.setDataFinal(LocalDate.parse(dataFinal));
@@ -166,7 +167,7 @@ public class AtividadeController {
 		return atividadeRep.findById(aId).get();
 	}
 	
-	public List<Atividade> listar(){
+	private List<Atividade> listar(){
 		return atividadeRep.findAll();
 	}
 	
@@ -176,10 +177,9 @@ public class AtividadeController {
 	
 	private int conutId(int idProjeto)
 	{
-
-		
 		return atividadeRep.fn_count_id_atividade(idProjeto);
 	}
+	
 	public void opAtividade() {
 
 	}
