@@ -118,10 +118,10 @@ class LbeGerenciadorDeProjetoSimplesApplicationTests {
 //		login = lrep.fn_login(null);
 //		System.out.println(login);
 		
-		Projetista pro = new Projetista();
-		pro.setId(2);
-		pro = projetistaCon.consultar(pro);
-		projetistaCon.deletar(pro);
+//		Projetista pro = new Projetista();
+//		pro.setId(2);
+//		pro = projetistaCon.consultar(pro);
+//		projetistaCon.deletar(pro);
 	}
 
 }
